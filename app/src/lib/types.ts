@@ -89,7 +89,7 @@ export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
   transfer: 'Transfer Bank',
   ewallet: 'E-wallet',
   cc: 'Kartu Kredit',
-  retail: 'Retail (Alfamart)',
+  retail: 'Retail',
   paypal: 'PayPal',
   crypto: 'Crypto',
 };
@@ -102,13 +102,13 @@ export interface ProviderMeta {
 export const PROVIDER_META: Record<string, ProviderMeta> = {
   // help.contabo.com: Credit Card, PayPal, Bank Transfer (+ Skrill, Direct Debit). Crypto TIDAK diterima.
   contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer'] },
-  // hostinger.com/support: Credit Card + PayPal; ID menambah QRIS, e-wallet (OVO), transfer bank.
-  hostinger: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal'] },
+  // hostinger.com/support: Credit Card + PayPal; ID menambah QRIS, e-wallet (OVO), transfer bank, retail (Alfamart).
+  hostinger: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal', 'retail'] },
   // idcloudhost.com/panduan: Transfer/VA, e-wallet, QRIS, Kartu Kredit, PayPal, Alfamart/Indomaret/Lawson.
   idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal', 'retail'] },
-  // kb.biznetgio.com (NEO Cloud): Kartu Kredit (Visa/MC/JCB), Transfer Bank/VA, e-Wallet, QRIS.
+  // NEO Cloud (dikonfirmasi): QRIS, e-Wallet, Transfer Bank/VA, Kartu Kredit (Visa/MC/JCB).
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
-  // Checkout Dalang: Kartu Kredit/Debit (Visa/MC/AMEX/JCB), Retail (Indomaret), E-Wallet (DANA/GoPay/LinkAja), QRIS. Tanpa transfer/VA.
+  // Checkout Dalang: Kartu Kredit/Debit (Visa/MC/AMEX/JCB), Retail (Indomaret saja), E-Wallet (DANA/GoPay/LinkAja), QRIS. Tanpa transfer/VA.
   dalang: { region: 'local', payments: ['qris', 'ewallet', 'cc', 'retail'] },
   // Model topup; channel dikonfirmasi pemilik situs: QRIS, transfer/VA, e-wallet, kartu kredit, retail (Alfamart).
   sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
