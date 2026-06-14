@@ -88,7 +88,14 @@ function AppContent() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 h-16">
           <a href="#top" className="flex items-center gap-2 font-bold tracking-tight">
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-violet-500 shadow-sm shadow-primary/30">
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="white" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m5 13 4 4 10-12" /></svg>
+              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="3.5" width="18" height="7.5" rx="2.2" />
+                <rect x="3" y="13" width="18" height="7.5" rx="2.2" />
+                <g fill="white" stroke="none">
+                  <circle cx="6.9" cy="6" r="0.95" /><circle cx="6.9" cy="8.4" r="0.95" />
+                  <circle cx="6.9" cy="15.5" r="0.95" /><circle cx="6.9" cy="17.9" r="0.95" />
+                </g>
+              </svg>
             </span>
             <span className="text-[15px]">CekVPS</span>
           </a>
@@ -260,7 +267,14 @@ function AppContent() {
             <div className="col-span-2 sm:col-span-2">
               <a href="#top" className="flex items-center gap-2 font-bold">
                 <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-violet-500">
-                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="white" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m5 13 4 4 10-12" /></svg>
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="3" y="3.5" width="18" height="7.5" rx="2.2" />
+                    <rect x="3" y="13" width="18" height="7.5" rx="2.2" />
+                    <g fill="white" stroke="none">
+                      <circle cx="6.9" cy="6" r="0.95" /><circle cx="6.9" cy="8.4" r="0.95" />
+                      <circle cx="6.9" cy="15.5" r="0.95" /><circle cx="6.9" cy="17.9" r="0.95" />
+                    </g>
+                  </svg>
                 </span>
                 CekVPS
               </a>
