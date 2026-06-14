@@ -48,7 +48,6 @@ export function updateFX(usdToIdr: number, eurToIdr: number) {
 
 export const PROVIDER_NAMES: Record<string, string> = {
   contabo: 'Contabo',
-  hetzner: 'Hetzner',
   digitalocean: 'DigitalOcean',
   hostinger: 'Hostinger',
   idcloudhost: 'IDCloudHost',
@@ -62,7 +61,6 @@ export const PROVIDER_NAMES: Record<string, string> = {
 
 export const PROVIDER_COLORS: Record<string, string> = {
   contabo: 'from-indigo-600 to-indigo-800',
-  hetzner: 'from-amber-500 to-orange-600',
   digitalocean: 'from-blue-500 to-blue-700',
   hostinger: 'from-purple-500 to-pink-600',
   idcloudhost: 'from-emerald-500 to-green-700',
@@ -102,7 +100,6 @@ export interface ProviderMeta {
 
 export const PROVIDER_META: Record<string, ProviderMeta> = {
   contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer', 'crypto'] },
-  hetzner: { region: 'global', payments: ['cc', 'paypal', 'transfer'] },
   digitalocean: { region: 'global', payments: ['cc', 'paypal'] },
   hostinger: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
   idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },

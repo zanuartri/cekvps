@@ -26,7 +26,6 @@ RETRY_DELAY = 2
 # yang masih False memakai seed/fallback price sampai scraper-nya dibuat.
 VPS_PROVIDERS = {
     "contabo": {"enabled": True, "priority": 1},
-    "hetzner": {"enabled": True, "priority": 2},  # needs HETZNER_API_TOKEN env var
     "digitalocean": {"enabled": False, "priority": 3},
     "hostinger": {"enabled": False, "priority": 4},
     "idcloudhost": {"enabled": True, "priority": 5},

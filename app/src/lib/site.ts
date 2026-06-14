@@ -39,7 +39,6 @@ interface AffiliateConfig {
 export const AFFILIATES: Record<string, AffiliateConfig> = {
   // Provider dengan program affiliate. Isi `ref` dengan kode kamu lalu set enabled: true.
   contabo: { enabled: false, ref: 'YOUR_CONTABO_REF', param: 'aff' },
-  hetzner: { enabled: false, ref: 'YOUR_HETZNER_REF', param: 'ref' },
   digitalocean: { enabled: false, ref: 'YOUR_DO_REF', param: 'refcode' },
   hostinger: { enabled: false, ref: 'YOUR_HOSTINGER_REF', param: 'REFERRALCODE' },
   vultr: { enabled: false, ref: 'YOUR_VULTR_REF', param: 'ref' },
