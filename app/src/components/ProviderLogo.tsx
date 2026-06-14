@@ -15,7 +15,7 @@ const EXTS = ['svg', 'png', 'webp', 'jpg', 'jpeg', 'avif'] as const
 
 // Logos that already fill their own canvas (a colored circle/badge).
 // These are shown edge-to-edge, without a white tile or padding.
-const BLEED = new Set(['vultr', 'alibaba', 'digitalocean', 'hostinger'])
+const BLEED = new Set(['hostinger'])
 
 /**
  * Logo provider. Logo "bleed" tampil penuh (tanpa tile), sisanya di atas

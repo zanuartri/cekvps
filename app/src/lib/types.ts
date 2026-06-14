@@ -29,6 +29,11 @@ export interface VPSResponse {
   };
 }
 
+// Target audience = vibe coders, so cap the catalog to small/mid plans and hide
+// enterprise tiers. The grid/finder filter on these and the Cari sliders use them.
+export const MAX_VCPU = 8;
+export const MAX_RAM_GB = 32;
+
 export type CurrencyCode = 'IDR' | 'USD' | 'EUR';
 
 export interface FxEntry { symbol: string; locale: string; decimals: number; toIDR: number }
@@ -48,27 +53,19 @@ export function updateFX(usdToIdr: number, eurToIdr: number) {
 
 export const PROVIDER_NAMES: Record<string, string> = {
   contabo: 'Contabo',
-  digitalocean: 'DigitalOcean',
   hostinger: 'Hostinger',
   idcloudhost: 'IDCloudHost',
   biznet_gio: 'Biznet Gio',
-  alibaba: 'Alibaba Cloud',
-  tencent: 'Tencent Cloud',
   dalang: 'Dalang.io',
-  vultr: 'Vultr',
   sumopod: 'Sumopod',
 };
 
 export const PROVIDER_COLORS: Record<string, string> = {
   contabo: 'from-indigo-600 to-indigo-800',
-  digitalocean: 'from-blue-500 to-blue-700',
   hostinger: 'from-purple-500 to-pink-600',
   idcloudhost: 'from-emerald-500 to-green-700',
   biznet_gio: 'from-cyan-600 to-teal-700',
-  alibaba: 'from-orange-500 to-red-600',
-  tencent: 'from-sky-500 to-blue-700',
   dalang: 'from-violet-500 to-purple-700',
-  vultr: 'from-sky-500 to-indigo-600',
   sumopod: 'from-sky-400 to-blue-600',
 };
 
@@ -100,14 +97,10 @@ export interface ProviderMeta {
 
 export const PROVIDER_META: Record<string, ProviderMeta> = {
   contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer', 'crypto'] },
-  digitalocean: { region: 'global', payments: ['cc', 'paypal'] },
   hostinger: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
   idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
-  alibaba: { region: 'global', payments: ['cc', 'paypal'] },
-  tencent: { region: 'global', payments: ['cc', 'paypal'] },
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
-  vultr: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
   sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
 };
 

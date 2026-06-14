@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from 'react'
+import { useState, useMemo, type ReactNode } from 'react'
 import { Search } from 'lucide-react'
 import { CurrencyProvider } from '@/context/CurrencyContext'
 import { useVPSData } from '@/hooks/useVPSData'
-import { PROVIDER_NAMES, REGION_LABELS } from '@/lib/types'
+import { PROVIDER_NAMES, REGION_LABELS, MAX_VCPU, MAX_RAM_GB } from '@/lib/types'
 import type { Region, PaymentMethod } from '@/lib/types'
 import Hero from '@/components/Hero'
 import CurrencyToggle from '@/components/CurrencyToggle'
@@ -67,7 +67,11 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 }
 
 function AppContent() {
-  const { vps, lastRun, loading, error } = useVPSData()
+  const { vps: allVps, lastRun, loading, error } = useVPSData()
+  const vps = useMemo(
+    () => allVps.filter(p => p.vcpu <= MAX_VCPU && (p.ram_gb ?? 0) <= MAX_RAM_GB),
+    [allVps]
+  )
   const [filter, setFilter] = useState<string | null>(null)
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<SortKey>('price-asc')

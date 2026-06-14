@@ -26,14 +26,10 @@ RETRY_DELAY = 2
 # yang masih False memakai seed/fallback price sampai scraper-nya dibuat.
 VPS_PROVIDERS = {
     "contabo": {"enabled": True, "priority": 1},
-    "digitalocean": {"enabled": False, "priority": 3},
-    "hostinger": {"enabled": False, "priority": 4},
+    "hostinger": {"enabled": False, "priority": 4},   # TODO: real data (curated/scrape)
     "idcloudhost": {"enabled": True, "priority": 5},
     "biznet_gio": {"enabled": True, "priority": 6},
-    "alibaba": {"enabled": False, "priority": 7},
-    "tencent": {"enabled": False, "priority": 8},
-    "dalang": {"enabled": False, "priority": 9},
-    "vultr": {"enabled": False, "priority": 10},
+    "dalang": {"enabled": False, "priority": 9},       # TODO: real data (curated/scrape)
     "sumopod": {"enabled": True, "priority": 11},
 }
 

@@ -1,7 +1,7 @@
 import { useState, useMemo, type ReactNode } from 'react'
 import type { VPSPlan } from '@/lib/types'
 import { useCurrency } from '@/context/CurrencyContext'
-import { convertPrice, fmtPrice, fmtStorage, PROVIDER_NAMES } from '@/lib/types'
+import { convertPrice, fmtPrice, fmtStorage, PROVIDER_NAMES, MAX_VCPU, MAX_RAM_GB } from '@/lib/types'
 import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
 import { Slider } from '@/components/ui/slider'
 import ProviderLogo from '@/components/ProviderLogo'
@@ -29,10 +29,10 @@ export default function Calculator({ vps }: CalculatorProps) {
     <div className="rounded-2xl border bg-card p-6 sm:p-8 shadow-sm">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <Control label="RAM minimum" value={`${ram} GB`}>
-          <Slider value={[ram]} onValueChange={([v]) => setRam(v)} min={0} max={64} step={2} />
+          <Slider value={[ram]} onValueChange={([v]) => setRam(v)} min={0} max={MAX_RAM_GB} step={2} />
         </Control>
         <Control label="CPU minimum" value={`${cpu} core`}>
-          <Slider value={[cpu]} onValueChange={([v]) => setCpu(v)} min={1} max={32} step={1} />
+          <Slider value={[cpu]} onValueChange={([v]) => setCpu(v)} min={1} max={MAX_VCPU} step={1} />
         </Control>
       </div>
 

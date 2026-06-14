@@ -39,13 +39,9 @@ interface AffiliateConfig {
 export const AFFILIATES: Record<string, AffiliateConfig> = {
   // Provider dengan program affiliate. Isi `ref` dengan kode kamu lalu set enabled: true.
   contabo: { enabled: false, ref: 'YOUR_CONTABO_REF', param: 'aff' },
-  digitalocean: { enabled: false, ref: 'YOUR_DO_REF', param: 'refcode' },
   hostinger: { enabled: false, ref: 'YOUR_HOSTINGER_REF', param: 'REFERRALCODE' },
-  vultr: { enabled: false, ref: 'YOUR_VULTR_REF', param: 'ref' },
-  alibaba: { enabled: false, ref: 'YOUR_ALIBABA_REF', param: 'utm_source' },
-  tencent: { enabled: false, ref: 'YOUR_TENCENT_REF', param: 'from' },
-  // idcloudhost, biznet_gio, dalang: belum/ tidak ada program affiliate publik —
-  // tetap tampil dengan link langsung ke halaman provider (tanpa kode ref).
+  // idcloudhost, biznet_gio, dalang, sumopod: belum/ tidak ada program affiliate
+  // publik — tampil dengan link langsung ke halaman provider (tanpa kode ref).
 }
 
 /** Apakah provider ini partner affiliate aktif. */
