@@ -32,7 +32,7 @@ VPS_PROVIDERS = {
     "dalang": {"enabled": False, "priority": 9},       # TODO: real data (curated/scrape)
     "sumopod": {"enabled": True, "priority": 11},
     "domainesia": {"enabled": True, "priority": 12},
-    "cloudkilat": {"enabled": False, "priority": 13},  # TODO: real data (curated/scrape)
+    "cloudkilat": {"enabled": True, "priority": 13},
 }
 
 # Domain registrars
@@ -113,6 +113,18 @@ FALLBACK_VPS = {
         {"plan": "Cirrus 12GB", "vcpu": 6,  "ram_gb": 12, "storage_gb": 320,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 705000,  "price_orig": 1128000, "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
         {"plan": "Cirrus 16GB", "vcpu": 8,  "ram_gb": 16, "storage_gb": 640,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 1260000, "price_orig": 2016000, "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
         {"plan": "Cirrus 24GB", "vcpu": 12, "ram_gb": 24, "storage_gb": 1200, "storage_type": "NVMe", "bandwidth_tb": None, "price": 2250000, "price_orig": 3600000, "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
+    ],
+    # CloudKilat "Kilat VPS". Monthly price is scraped live from the page's
+    # JSON-LD; this is the last-known snapshot used if that fails. Full SSD, no
+    # advertised bandwidth cap (-> None), no promo. Source:
+    # https://www.cloudkilat.com/id/kilat-vps/
+    "cloudkilat": [
+        {"plan": "Kilat VPS XXS", "vcpu": 1,  "ram_gb": 1,  "storage_gb": 20,  "storage_type": "SSD", "bandwidth_tb": None, "price": 90000,   "currency": "IDR", "url": "https://www.cloudkilat.com/id/kilat-vps/"},
+        {"plan": "Kilat VPS XS",  "vcpu": 2,  "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": None, "price": 180000,  "currency": "IDR", "url": "https://www.cloudkilat.com/id/kilat-vps/"},
+        {"plan": "Kilat VPS S",   "vcpu": 4,  "ram_gb": 4,  "storage_gb": 70,  "storage_type": "SSD", "bandwidth_tb": None, "price": 360000,  "currency": "IDR", "url": "https://www.cloudkilat.com/id/kilat-vps/"},
+        {"plan": "Kilat VPS M",   "vcpu": 8,  "ram_gb": 8,  "storage_gb": 120, "storage_type": "SSD", "bandwidth_tb": None, "price": 720000,  "currency": "IDR", "url": "https://www.cloudkilat.com/id/kilat-vps/"},
+        {"plan": "Kilat VPS L",   "vcpu": 16, "ram_gb": 16, "storage_gb": 200, "storage_type": "SSD", "bandwidth_tb": None, "price": 1440000, "currency": "IDR", "url": "https://www.cloudkilat.com/id/kilat-vps/"},
+        {"plan": "Kilat VPS XL",  "vcpu": 32, "ram_gb": 32, "storage_gb": 320, "storage_type": "SSD", "bandwidth_tb": None, "price": 2880000, "currency": "IDR", "url": "https://www.cloudkilat.com/id/kilat-vps/"},
     ],
     "sumopod": [
         {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
