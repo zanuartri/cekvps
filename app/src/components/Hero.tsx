@@ -46,7 +46,7 @@ export default function Hero({ vps, lastRun }: HeroProps) {
           <h1 className="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight text-balance">
             Cari VPS termurah,{' '}
             <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
-              tanpa buka 10 tab.
+              tanpa buka banyak tab.
             </span>
           </h1>
 
