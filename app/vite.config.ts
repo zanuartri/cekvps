@@ -10,8 +10,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  build: {
-    outDir: '/var/www/cekvps',
-    emptyOutDir: true,
-  },
+  // Default outDir is `dist`; the Docker build copies it into the nginx web root.
 })

@@ -1,0 +1,21 @@
+# Build output & deps (rebuilt in the image)
+app/node_modules
+app/dist
+**/node_modules
+
+# Python local env / caches
+scraper/.venv
+**/__pycache__
+**/*.pyc
+
+# VCS / tooling / docs
+.git
+.github
+.gitignore
+*.md
+.commandcode
+.claude
+
+# Local env files
+**/.env
+**/.env.local

@@ -6,7 +6,9 @@ from pathlib import Path
 
 # Paths
 ROOT = Path(__file__).resolve().parent.parent
-LIVE_DATA = Path("/var/www/cekvps/data")
+# Where scraped JSON is written. In the container this is the nginx web root's
+# /data dir (set via CEKVPS_DATA_DIR); defaults to the legacy bare-metal path.
+LIVE_DATA = Path(os.environ.get("CEKVPS_DATA_DIR", "/var/www/cekvps/data"))
 DATA_VPS = LIVE_DATA / "vps"
 DATA_DOMAIN = LIVE_DATA / "domains"
 DATA_VPS.mkdir(parents=True, exist_ok=True)

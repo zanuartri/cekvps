@@ -1,0 +1,6 @@
+# Container/shell files must stay LF or they break in the Linux image.
+*.sh            text eol=lf
+deploy/crontab  text eol=lf
+deploy/nginx.conf text eol=lf
+Dockerfile      text eol=lf
+entrypoint.sh   text eol=lf
