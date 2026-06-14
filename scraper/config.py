@@ -83,9 +83,12 @@ FALLBACK_VPS = {
         {"plan": "Basic Standard 4GB/60GB", "vcpu": 2, "ram_gb": 4, "storage_gb": 60, "storage_type": "SSD", "bandwidth_tb": None, "price": 225000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
     ],
     # Sumopod resells Tencent Cloud VPS. The deploy panel is an auth-gated SPA
-    # behind Cloudflare (not scrapable), so data is curated. Prices are the
-    # promo price (40% off); price_orig is the pre-discount price. bandwidth_tb
-    # is the monthly egress allowance. Source: sumopod.com deploy panel.
+    # behind Cloudflare (not scrapable), so data is curated. `price` is the
+    # 40%-off price; `price_orig` is the normal price. The 40% discount is
+    # public AND recurring (applies to renewals) for ALL users — verified via
+    # Sumopod's official Threads (@sumopodcloud, "Syukuran Diskon 40% Untuk
+    # Semua VPS Tencent"), so `price` is the real ongoing price, not a teaser.
+    # Do NOT "correct" it up to price_orig. bandwidth_tb = monthly egress.
     "sumopod": [
         {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
         {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "price": 45000,  "price_orig": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},
