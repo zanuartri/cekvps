@@ -1,0 +1,22 @@
+# Dependencies
+app/node_modules/
+scraper/.venv/
+scraper/__pycache__/
+
+# Build output (goes to /var/www/cekvps/)
+app/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+
+data/
