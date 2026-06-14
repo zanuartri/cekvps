@@ -16,7 +16,11 @@ export default function DeployCost({ vps }: DeployCostProps) {
   const { currency } = useCurrency()
   const [selProvider, setSelProvider] = useState('')
   const [selPlan, setSelPlan] = useState('')
-  const providers = useMemo(() => [...new Set(vps.map(p => p.provider))], [vps])
+  const providers = useMemo(
+    () => [...new Set(vps.map(p => p.provider))].sort((a, b) =>
+      (PROVIDER_NAMES[a] || a).localeCompare(PROVIDER_NAMES[b] || b)),
+    [vps]
+  )
   const plans = useMemo(() => vps.filter(p => p.provider === selProvider), [vps, selProvider])
 
   const selectedVPS = useMemo(

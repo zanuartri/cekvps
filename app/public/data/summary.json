@@ -1,7 +1,5 @@
 {
-  "last_run": "2026-06-14T00:00:00Z",
-  "vps_providers": 10,
-  "vps_plans": 37,
-  "domain_registrars": 0,
-  "domain_tlds": 0
+  "last_run": "2026-06-14T11:27:49.855260+00:00",
+  "vps_providers": 11,
+  "vps_plans": 49
 }
