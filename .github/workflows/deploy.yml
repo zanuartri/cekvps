@@ -1,7 +1,6 @@
 name: Deploy to VPS
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:  # manual only — SSH key issue, disabled for now
 
 jobs:
   deploy:
