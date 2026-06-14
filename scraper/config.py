@@ -31,7 +31,7 @@ VPS_PROVIDERS = {
     "biznet_gio": {"enabled": True, "priority": 6},
     "dalang": {"enabled": False, "priority": 9},       # TODO: real data (curated/scrape)
     "sumopod": {"enabled": True, "priority": 11},
-    "domainesia": {"enabled": False, "priority": 12},  # TODO: real data (curated/scrape)
+    "domainesia": {"enabled": True, "priority": 12},
     "cloudkilat": {"enabled": False, "priority": 13},  # TODO: real data (curated/scrape)
 }
 
@@ -99,6 +99,20 @@ FALLBACK_VPS = {
         {"plan": "KVM 2", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "NVMe", "bandwidth_tb": 8,  "price": 252900, "price_orig": 407900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
         {"plan": "KVM 4", "vcpu": 4, "ram_gb": 16, "storage_gb": 200, "storage_type": "NVMe", "bandwidth_tb": 16, "price": 485900, "price_orig": 679900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
         {"plan": "KVM 8", "vcpu": 8, "ram_gb": 32, "storage_gb": 400, "storage_type": "NVMe", "bandwidth_tb": 32, "price": 970900, "price_orig": 1203900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+    ],
+    # DomaiNesia "Cirrus" Cloud Hosting (managed, but dedicated CPU/RAM + NVMe +
+    # SSH, so VPS-adjacent). The /cloud-hosting/ page is scrapable; this is the
+    # last-known snapshot used if the scrape fails. `price` is the promo /bln,
+    # `price_orig` the struck-through reference; the discount is recurring
+    # (renewal == promo). Bandwidth is "Unlimited" -> None.
+    # Source: https://www.domainesia.com/cloud-hosting/
+    "domainesia": [
+        {"plan": "Cirrus 2GB",  "vcpu": 2,  "ram_gb": 2,  "storage_gb": 40,   "storage_type": "NVMe", "bandwidth_tb": None, "price": 112500,  "price_orig": 225000,  "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
+        {"plan": "Cirrus 4GB",  "vcpu": 3,  "ram_gb": 4,  "storage_gb": 80,   "storage_type": "NVMe", "bandwidth_tb": None, "price": 210000,  "price_orig": 336000,  "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
+        {"plan": "Cirrus 8GB",  "vcpu": 4,  "ram_gb": 8,  "storage_gb": 160,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 390000,  "price_orig": 624000,  "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
+        {"plan": "Cirrus 12GB", "vcpu": 6,  "ram_gb": 12, "storage_gb": 320,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 705000,  "price_orig": 1128000, "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
+        {"plan": "Cirrus 16GB", "vcpu": 8,  "ram_gb": 16, "storage_gb": 640,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 1260000, "price_orig": 2016000, "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
+        {"plan": "Cirrus 24GB", "vcpu": 12, "ram_gb": 24, "storage_gb": 1200, "storage_type": "NVMe", "bandwidth_tb": None, "price": 2250000, "price_orig": 3600000, "currency": "IDR", "url": "https://www.domainesia.com/cloud-hosting/"},
     ],
     "sumopod": [
         {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
