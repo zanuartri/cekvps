@@ -22,16 +22,19 @@ USER_AGENT = (
 RETRIES = 3
 RETRY_DELAY = 2
 
-# VPS providers to scrape
+# VPS providers (MVP set). `enabled` = scraper module aktif;
+# yang masih False memakai seed/fallback price sampai scraper-nya dibuat.
 VPS_PROVIDERS = {
     "contabo": {"enabled": True, "priority": 1},
-    "biznet_gio": {"enabled": True, "priority": 2},
-    "hetzner": {"enabled": False, "priority": 3},
-    "digitalocean": {"enabled": False, "priority": 4},
-    "vultr": {"enabled": False, "priority": 5},
-    "hostinger": {"enabled": False, "priority": 6},
-    "idcloudhost": {"enabled": False, "priority": 7},
-    "dalang": {"enabled": False, "priority": 8},
+    "hetzner": {"enabled": False, "priority": 2},
+    "digitalocean": {"enabled": False, "priority": 3},
+    "hostinger": {"enabled": False, "priority": 4},
+    "idcloudhost": {"enabled": False, "priority": 5},
+    "biznet_gio": {"enabled": True, "priority": 6},
+    "alibaba": {"enabled": False, "priority": 7},
+    "tencent": {"enabled": False, "priority": 8},
+    "dalang": {"enabled": False, "priority": 9},
+    "vultr": {"enabled": False, "priority": 10},
 }
 
 # Domain registrars

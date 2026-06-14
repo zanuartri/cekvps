@@ -7,7 +7,10 @@ import CurrencyToggle from '@/components/CurrencyToggle'
 import VPSGrid from '@/components/VPSGrid'
 import Calculator from '@/components/Calculator'
 import DeployCost from '@/components/DeployCost'
+import FAQ from '@/components/FAQ'
+import Support from '@/components/Support'
 import { Button } from '@/components/ui/button'
+import { SITE, SAWERIA_URL, AFFILIATE_DISCLOSURE } from '@/lib/site'
 
 function AppContent() {
   const { vps, lastRun, loading, error } = useVPSData()
@@ -41,10 +44,15 @@ function AppContent() {
           <div className="flex items-center gap-3 shrink-0">
             <CurrencyToggle />
             {lastRun && (
-              <span className="hidden sm:block text-xs text-muted-foreground">
+              <span className="hidden lg:block text-xs text-muted-foreground">
                 {timeAgo(lastRun)}
               </span>
             )}
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">
+                ☕ Dukung
+              </a>
+            </Button>
           </div>
         </div>
       </nav>
@@ -106,26 +114,69 @@ function AppContent() {
             <DeployCost vps={vps} />
           </section>
         )}
+
+        {/* Support / Donation */}
+        {!loading && !error && <Support />}
+
+        {/* FAQ */}
+        {!loading && !error && <FAQ />}
       </main>
 
       {/* Footer */}
       <footer className="border-t mt-16 bg-card/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-center text-sm text-muted-foreground">
-          <p className="font-semibold text-foreground mb-1">🖥️ CekVPS</p>
-          <p>Harga bisa berubah sewaktu-waktu.</p>
-          {lastRun && (
-            <p className="mt-1">
-              Update terakhir:{' '}
-              {new Date(lastRun).toLocaleDateString('id-ID', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </p>
-          )}
-          <p className="mt-3">Dibuat untuk vibe coder Indonesia 🚀</p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div>
+              <p className="font-semibold text-foreground mb-2">🖥️ {SITE.name}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+                {SITE.tagline}. Gratis, tanpa iklan, dibuat untuk developer Indonesia 🚀
+              </p>
+            </div>
+            <div>
+              <p className="font-semibold text-foreground mb-2 text-sm">Navigasi</p>
+              <ul className="space-y-1.5 text-sm text-muted-foreground">
+                <li><a href="#vps" className="hover:text-foreground">Bandingkan VPS</a></li>
+                <li><a href="#calculator" className="hover:text-foreground">Kalkulator Spek</a></li>
+                <li><a href="#deploy-cost" className="hover:text-foreground">Estimasi Biaya</a></li>
+                <li><a href="#faq" className="hover:text-foreground">FAQ</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-semibold text-foreground mb-2 text-sm">Terhubung</p>
+              <ul className="space-y-1.5 text-sm text-muted-foreground">
+                <li>
+                  <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
+                    ☕ Dukung via Saweria
+                  </a>
+                </li>
+                {SITE.social.github && (
+                  <li><a href={SITE.social.github} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">GitHub</a></li>
+                )}
+                {SITE.social.email && (
+                  <li><a href={`mailto:${SITE.social.email}`} className="hover:text-foreground">{SITE.social.email}</a></li>
+                )}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t text-xs text-muted-foreground space-y-2">
+            <p className="leading-relaxed">{AFFILIATE_DISCLOSURE}</p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pt-1">
+              <p>© {new Date().getFullYear()} {SITE.name}. Harga bisa berubah sewaktu-waktu — cek ulang di provider.</p>
+              {lastRun && (
+                <p>
+                  Update terakhir:{' '}
+                  {new Date(lastRun).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       </footer>
     </div>

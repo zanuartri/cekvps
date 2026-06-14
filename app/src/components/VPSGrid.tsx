@@ -1,6 +1,7 @@
 import type { VPSPlan } from '@/lib/types'
 import { useCurrency } from '@/context/CurrencyContext'
 import { convertPrice, fmtPrice, fmtStorage, fmtBandwidth, PROVIDER_NAMES, PROVIDER_COLORS } from '@/lib/types'
+import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
@@ -13,6 +14,7 @@ function ProviderCard({ provider, plans }: VPSCardProps) {
   const { currency } = useCurrency()
   const gradient = PROVIDER_COLORS[provider] || 'from-slate-600 to-slate-800'
   const name = PROVIDER_NAMES[provider] || provider
+  const partner = isAffiliate(provider)
 
   const sorted = [...plans].sort((a, b) => a.price_monthly - b.price_monthly)
   const firstCurrency = sorted[0]?.currency
@@ -22,16 +24,24 @@ function ProviderCard({ provider, plans }: VPSCardProps) {
       <CardHeader className={`bg-gradient-to-r ${gradient} text-white p-5`}>
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold">{name}</h3>
-          <Badge variant="secondary" className="bg-white/20 text-white border-0 text-xs">
-            {firstCurrency}
-          </Badge>
+          <div className="flex items-center gap-1.5">
+            {partner && (
+              <Badge variant="secondary" className="bg-white/25 text-white border-0 text-[10px] uppercase tracking-wide">
+                ⭐ Partner
+              </Badge>
+            )}
+            <Badge variant="secondary" className="bg-white/20 text-white border-0 text-xs">
+              {firstCurrency}
+            </Badge>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="p-0 divide-y divide-border">
         {sorted.map(p => {
           const price = convertPrice(p.price_monthly, p.currency as any, currency)
+          const outUrl = buildAffiliateUrl(p.provider, p.url)
           return (
-            <div key={p.plan} className="px-5 py-4 space-y-2">
+            <div key={p.plan} className="px-5 py-4 space-y-2.5">
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-sm text-foreground">{p.plan}</span>
                 <span className="text-lg font-bold tabular-nums text-primary">
@@ -45,6 +55,16 @@ function ProviderCard({ provider, plans }: VPSCardProps) {
                 <SpecBadge label={`📀 ${fmtStorage(p.storage_gb)} ${p.storage_type || ''}`} />
                 <SpecBadge label={`🌐 ${fmtBandwidth(p.bandwidth_tb)}`} />
               </div>
+              {outUrl && (
+                <a
+                  href={outUrl}
+                  target="_blank"
+                  rel={partner ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
+                  className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline underline-offset-2"
+                >
+                  Lihat di {name} →
+                </a>
+              )}
             </div>
           )
         })}

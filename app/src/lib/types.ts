@@ -31,24 +31,28 @@ export const FX: Record<CurrencyCode, { symbol: string; locale: string; decimals
 
 export const PROVIDER_NAMES: Record<string, string> = {
   contabo: 'Contabo',
-  biznet_gio: 'Biznet Gio',
   hetzner: 'Hetzner',
   digitalocean: 'DigitalOcean',
-  vultr: 'Vultr',
   hostinger: 'Hostinger',
   idcloudhost: 'IDCloudHost',
+  biznet_gio: 'Biznet Gio',
+  alibaba: 'Alibaba Cloud',
+  tencent: 'Tencent Cloud',
   dalang: 'Dalang.io',
+  vultr: 'Vultr',
 };
 
 export const PROVIDER_COLORS: Record<string, string> = {
   contabo: 'from-indigo-600 to-indigo-800',
-  biznet_gio: 'from-cyan-600 to-teal-700',
   hetzner: 'from-amber-500 to-orange-600',
   digitalocean: 'from-blue-500 to-blue-700',
-  vultr: 'from-sky-500 to-indigo-600',
   hostinger: 'from-purple-500 to-pink-600',
   idcloudhost: 'from-emerald-500 to-green-700',
+  biznet_gio: 'from-cyan-600 to-teal-700',
+  alibaba: 'from-orange-500 to-red-600',
+  tencent: 'from-sky-500 to-blue-700',
   dalang: 'from-violet-500 to-purple-700',
+  vultr: 'from-sky-500 to-indigo-600',
 };
 
 export function convertPrice(amount: number, from: CurrencyCode, to: CurrencyCode): number {

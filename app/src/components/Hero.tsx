@@ -1,4 +1,6 @@
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { SAWERIA_URL } from '@/lib/site'
 
 interface HeroProps {
   lastRun: string | null
@@ -25,15 +27,35 @@ export default function Hero({ lastRun }: HeroProps) {
           Bandingkan harga VPS dari provider Indonesia & global. Hitung biaya
           deploy app pertamamu — biar gak bingung pas pertama kali.
         </p>
+        <div className="mt-7 flex flex-col sm:flex-row gap-3">
+          <Button
+            asChild
+            size="lg"
+            variant="secondary"
+            className="bg-white text-primary hover:bg-white/90 font-semibold"
+          >
+            <a href="#vps">🔍 Bandingkan Harga</a>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+          >
+            <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">
+              ☕ Dukung Proyek Ini
+            </a>
+          </Button>
+        </div>
         <div className="mt-6 flex flex-wrap gap-2">
-          <Badge variant="secondary" className="bg-white/15 text-white hover:bg-white/20 border-0">
-            🎯 Bocah PKL & Mahasiswa
-          </Badge>
           <Badge variant="secondary" className="bg-white/15 text-white hover:bg-white/20 border-0">
             🇮🇩 Harga Rupiah & Global
           </Badge>
           <Badge variant="secondary" className="bg-white/15 text-white hover:bg-white/20 border-0">
-            ⚡ Update {lastRun ? 'mingguan' : '—'}
+            🆓 Gratis & Tanpa Iklan
+          </Badge>
+          <Badge variant="secondary" className="bg-white/15 text-white hover:bg-white/20 border-0">
+            ⚡ Update {lastRun ? 'berkala' : '—'}
           </Badge>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
 import type { CurrencyCode } from '@/lib/types'
 
+export type { CurrencyCode }
+
 interface CurrencyCtx {
   currency: CurrencyCode
   setCurrency: (c: CurrencyCode) => void
