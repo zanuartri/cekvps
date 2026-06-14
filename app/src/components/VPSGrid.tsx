@@ -121,8 +121,18 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
               {/* price + deploy */}
               <div className="flex items-center justify-between gap-4 sm:justify-end">
                 <div className="text-right">
-                  <span className="font-mono text-base font-bold tabular-nums">{fmtPrice(price, currency)}</span>
-                  <span className="text-xs text-muted-foreground">/bln</span>
+                  {p.discount_pct && p.price_original ? (
+                    <div className="flex items-center justify-end gap-1.5 leading-none">
+                      <span className="rounded bg-rose-400/15 px-1 py-px text-[10px] font-bold tabular-nums text-rose-300">−{p.discount_pct}%</span>
+                      <span className="font-mono text-[11px] tabular-nums text-muted-foreground line-through">
+                        {fmtPrice(convertPrice(p.price_original, p.currency as any, currency), currency)}
+                      </span>
+                    </div>
+                  ) : null}
+                  <div>
+                    <span className="font-mono text-base font-bold tabular-nums">{fmtPrice(price, currency)}</span>
+                    <span className="text-xs text-muted-foreground">/bln</span>
+                  </div>
                 </div>
                 {outUrl && (
                   <a

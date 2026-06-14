@@ -8,7 +8,6 @@ import Hero from '@/components/Hero'
 import CurrencyToggle from '@/components/CurrencyToggle'
 import VPSGrid, { type SortKey } from '@/components/VPSGrid'
 import Calculator from '@/components/Calculator'
-import DeployCost from '@/components/DeployCost'
 import FAQ from '@/components/FAQ'
 import Support from '@/components/Support'
 import { Button } from '@/components/ui/button'
@@ -230,18 +229,6 @@ function AppContent() {
               </section>
             )}
 
-            {/* Deploy cost */}
-            {vps.length > 0 && (
-              <section id="deploy-cost" className="scroll-mt-20">
-                <SectionHeading
-                  eyebrow="Estimasi Biaya"
-                  title="Estimasi biaya bulan pertama"
-                  desc="Pilih provider dan plan untuk lihat estimasi biaya bulan pertama."
-                />
-                <DeployCost vps={vps} />
-              </section>
-            )}
-
             {/* Support */}
             <section id="dukung" className="scroll-mt-20">
               <Support />
@@ -279,7 +266,6 @@ function AppContent() {
                 {NAV_LINKS.map(l => (
                   <li key={l.href}><a href={l.href} className="transition-colors hover:text-foreground">{l.label}</a></li>
                 ))}
-                <li><a href="#deploy-cost" className="transition-colors hover:text-foreground">Estimasi biaya</a></li>
               </ul>
             </div>
             <div>
