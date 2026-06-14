@@ -78,7 +78,7 @@ export const PROVIDER_COLORS: Record<string, string> = {
 // Catatan: metode pembayaran bersifat indikatif. Yang lokal (Indonesia) terima QRIS;
 // yang global umumnya kartu kredit/PayPal. Selalu cek final di halaman provider.
 export type Region = 'local' | 'global';
-export type PaymentMethod = 'qris' | 'transfer' | 'ewallet' | 'cc' | 'paypal' | 'crypto';
+export type PaymentMethod = 'qris' | 'transfer' | 'ewallet' | 'cc' | 'retail' | 'paypal' | 'crypto';
 
 export const REGION_LABELS: Record<Region, string> = {
   local: 'Lokal',
@@ -90,6 +90,7 @@ export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
   transfer: 'Transfer Bank',
   ewallet: 'E-wallet',
   cc: 'Kartu Kredit',
+  retail: 'Retail (Alfamart)',
   paypal: 'PayPal',
   crypto: 'Crypto',
 };
@@ -110,7 +111,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   tencent: { region: 'global', payments: ['cc', 'paypal'] },
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
   vultr: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
-  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
+  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
 };
 
 export const DEFAULT_META: ProviderMeta = { region: 'global', payments: ['cc'] };
