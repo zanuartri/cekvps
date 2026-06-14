@@ -62,7 +62,9 @@ FALLBACK_VPS = {
         {"plan": "Cloud VPS 60",      "vcpu": 18, "ram_gb": 96,  "storage_gb": 350,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 39.20, "currency": "EUR", "url": "https://contabo.com/en/vps/"},
     ],
     # Biznet's budget line is "NEO Lite". Plan name = "<SIZE> <RAM_GB>.<vCPU>".
-    # All NEO Lite tiers ship 60 GB SSD. Source: www.biznetgio.com/pricelist
+    # All NEO Lite tiers ship 60 GB SSD. bandwidth_tb = None = UNLIMITED:
+    # NEO Lite advertises unlimited data transfer (free bandwidth up to 10 Gbps),
+    # confirmed June 2026. Source: www.biznetgio.com/product/neo-lite + /pricelist
     "biznet_gio": [
         {"plan": "NEO Lite XS 1.1",   "vcpu": 1,  "ram_gb": 1,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 59000,  "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
         {"plan": "NEO Lite SS 2.1",   "vcpu": 1,  "ram_gb": 2,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 80000,  "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
@@ -73,7 +75,9 @@ FALLBACK_VPS = {
     ],
     # IDCloudHost sits behind a Cloudflare challenge (plain HTTP -> 403), so its
     # data is curated, not scraped. Prices are "simulasi"/indicative per their
-    # page. Source: https://idcloudhost.com/pricing/ (Basic Standard tiers).
+    # page. bandwidth_tb = None = UNLIMITED: Cloud VPS ships unmetered/unlimited
+    # premium bandwidth, confirmed June 2026 (idcloudhost.com/blog/vps-unlimited-
+    # bandwidth). Source: https://idcloudhost.com/pricing/ (Basic Standard tiers).
     "idcloudhost": [
         {"plan": "Basic Standard 2GB/20GB", "vcpu": 2, "ram_gb": 2, "storage_gb": 20, "storage_type": "SSD", "bandwidth_tb": None, "price": 87000,  "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
         {"plan": "Basic Standard 2GB/40GB", "vcpu": 2, "ram_gb": 2, "storage_gb": 40, "storage_type": "SSD", "bandwidth_tb": None, "price": 100000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},

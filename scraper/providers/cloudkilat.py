@@ -23,7 +23,9 @@ logger = logging.getLogger("cekvps.cloudkilat")
 PROVIDER = "cloudkilat"
 BASE_URL = "https://www.cloudkilat.com/id/kilat-vps/"
 
-# Static hardware per tier (Full SSD; bandwidth not advertised -> None).
+# Static hardware per tier (Full SSD). bandwidth_tb = None means UNLIMITED here:
+# CloudKilat advertises "unlimited high-speed data transfer" for Kilat VPS
+# (cloudkilat.com), confirmed June 2026 — not "unknown".
 # Order here = display order on the page (XXS -> XL).
 SPECS = {
     "XXS": {"vcpu": 1,  "ram_gb": 1,  "storage_gb": 20},

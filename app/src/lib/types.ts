@@ -147,6 +147,10 @@ export function fmtStorage(gb: number | null): string {
   return gb >= 1000 ? `${(gb / 1000).toFixed(1)} TB` : `${gb} GB`;
 }
 
+// NOTE: null = genuinely UNLIMITED, not "unknown". Every provider that uses null
+// here has been verified to advertise unlimited/unmetered transfer (Contabo,
+// DomaiNesia, Dalang, Biznet Gio, IDCloudHost, CloudKilat). If a future
+// provider's transfer cap is unknown, give it a real number — don't pass null.
 export function fmtBandwidth(tb: number | null): string {
   if (tb === null || tb === undefined) return '∞ Unlimited';
   return tb >= 1 ? `${tb} TB` : `${tb * 1000} GB`;
