@@ -1,3 +1,5 @@
-# CekVPS scraper — refresh prices & FX 4x/day (00:10, 06:10, 12:10, 18:10 WIB).
+# CekVPS scraper — refresh prices & FX 2x/day (06:10 & 18:10 WIB). VPS prices
+# rarely change and FX updates ~once per business day, so twice is plenty; the
+# second run also covers a failed first run. Drop to once with `10 6 * * *`.
 # Env isn't inherited by busybox cron jobs, so set the data dir inline.
-10 */6 * * * CEKVPS_DATA_DIR=/usr/share/nginx/html/data python3 /scraper/run.py >> /var/log/cekvps-scrape.log 2>&1
+10 6,18 * * * CEKVPS_DATA_DIR=/usr/share/nginx/html/data python3 /scraper/run.py >> /var/log/cekvps-scrape.log 2>&1

@@ -11,7 +11,8 @@ database, no shared volumes — the data is regenerated from the scrape.
 - On boot, [`deploy/entrypoint.sh`](./deploy/entrypoint.sh) runs one scrape in
   the background, starts `crond`, then nginx (port **80**).
 - The site is usable immediately on the bundled data; the scrape and the cron
-  ([`deploy/crontab`](./deploy/crontab), every 6h) overwrite it with fresh data.
+  ([`deploy/crontab`](./deploy/crontab), 2x/day at 06:10 & 18:10 WIB) overwrite it
+  with fresh data.
 - Scraper writes to `CEKVPS_DATA_DIR` (`/usr/share/nginx/html/data` in the
   image), which nginx serves at `/data/…`.
 
@@ -37,7 +38,7 @@ make docker-run      # builds + runs on http://localhost:8080
 
 ## Notes
 
-- **Timezone** is `Asia/Jakarta` (cron fires 00:10/06:10/12:10/18:10 WIB).
+- **Timezone** is `Asia/Jakarta` (cron fires 06:10 & 18:10 WIB).
 - **Data is ephemeral** by design — on redeploy the fresh image re-bakes the
   committed `app/public/data` and the scraper refreshes it. If you want data to
   survive restarts without waiting for a scrape, mount a Coolify persistent
