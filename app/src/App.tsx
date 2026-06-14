@@ -78,7 +78,7 @@ function AppContent() {
     (PROVIDER_NAMES[a] || a).localeCompare(PROVIDER_NAMES[b] || b))
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen overflow-x-clip bg-background">
       {/* Navbar */}
       <nav className="sticky top-0 z-50 border-b border-border/70 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 h-16">
