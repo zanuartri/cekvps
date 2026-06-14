@@ -35,6 +35,7 @@ VPS_PROVIDERS = {
     "tencent": {"enabled": False, "priority": 8},
     "dalang": {"enabled": False, "priority": 9},
     "vultr": {"enabled": False, "priority": 10},
+    "sumopod": {"enabled": True, "priority": 11},
 }
 
 # Domain registrars
@@ -80,6 +81,18 @@ FALLBACK_VPS = {
         {"plan": "Basic Standard 2GB/20GB", "vcpu": 2, "ram_gb": 2, "storage_gb": 20, "storage_type": "SSD", "bandwidth_tb": None, "price": 87000,  "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
         {"plan": "Basic Standard 2GB/40GB", "vcpu": 2, "ram_gb": 2, "storage_gb": 40, "storage_type": "SSD", "bandwidth_tb": None, "price": 100000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
         {"plan": "Basic Standard 4GB/60GB", "vcpu": 2, "ram_gb": 4, "storage_gb": 60, "storage_type": "SSD", "bandwidth_tb": None, "price": 225000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
+    ],
+    # Sumopod resells Tencent Cloud VPS. The deploy panel is an auth-gated SPA
+    # behind Cloudflare (not scrapable), so data is curated. Prices are the
+    # promo price (40% off); price_orig is the pre-discount price. bandwidth_tb
+    # is the monthly egress allowance. Source: sumopod.com deploy panel.
+    "sumopod": [
+        {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "price": 45000,  "price_orig": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 4GB/60GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "storage_type": "SSD", "bandwidth_tb": 1.54, "price": 54000,  "price_orig": 90000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 4GB/70GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 70,  "storage_type": "SSD", "bandwidth_tb": 2.05, "price": 75000,  "price_orig": 125000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 8GB/80GB",  "vcpu": 2, "ram_gb": 8,  "storage_gb": 80,  "storage_type": "SSD", "bandwidth_tb": 2.56, "price": 90000,  "price_orig": 150000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 8GB/100GB", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "SSD", "bandwidth_tb": 3.07, "price": 111000, "price_orig": 185000, "currency": "IDR", "url": "https://sumopod.com/"},
     ],
 }
 

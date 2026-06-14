@@ -57,6 +57,7 @@ export const PROVIDER_NAMES: Record<string, string> = {
   tencent: 'Tencent Cloud',
   dalang: 'Dalang.io',
   vultr: 'Vultr',
+  sumopod: 'Sumopod',
 };
 
 export const PROVIDER_COLORS: Record<string, string> = {
@@ -70,6 +71,7 @@ export const PROVIDER_COLORS: Record<string, string> = {
   tencent: 'from-sky-500 to-blue-700',
   dalang: 'from-violet-500 to-purple-700',
   vultr: 'from-sky-500 to-indigo-600',
+  sumopod: 'from-sky-400 to-blue-600',
 };
 
 // --- Provider metadata: region & metode pembayaran ---
@@ -108,6 +110,7 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   tencent: { region: 'global', payments: ['cc', 'paypal'] },
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
   vultr: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
+  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
 };
 
 export const DEFAULT_META: ProviderMeta = { region: 'global', payments: ['cc'] };
