@@ -87,7 +87,9 @@ function AppContent() {
       <nav className="sticky top-0 z-50 border-b border-border/70 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 h-16">
           <a href="#top" className="flex items-center gap-2 font-bold tracking-tight">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-violet-500 text-sm text-white shadow-sm shadow-primary/30">C</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-violet-500 shadow-sm shadow-primary/30">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="white" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m5 13 4 4 10-12" /></svg>
+            </span>
             <span className="text-[15px]">CekVPS</span>
           </a>
 
@@ -257,7 +259,9 @@ function AppContent() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             <div className="col-span-2 sm:col-span-2">
               <a href="#top" className="flex items-center gap-2 font-bold">
-                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-violet-500 text-sm text-white">C</span>
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-violet-500">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="white" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m5 13 4 4 10-12" /></svg>
+                </span>
                 CekVPS
               </a>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
