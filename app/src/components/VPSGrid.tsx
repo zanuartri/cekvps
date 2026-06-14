@@ -61,7 +61,7 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
   )
 
   return (
-    <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="rounded-2xl border bg-card shadow-sm">
       {/* header (desktop) */}
       <div className="hidden grid-cols-[1.4fr_1.6fr_auto] items-center gap-4 border-b bg-secondary/40 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground sm:grid">
         <span>Provider / plan</span>
@@ -158,7 +158,7 @@ function InfoTip({ label, children }: { label: string; children: ReactNode }) {
       {children}
       <span
         role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 w-max max-w-[220px] -translate-x-1/2 translate-y-1 rounded-lg border bg-popover px-2.5 py-1.5 text-left font-sans text-[11px] font-normal normal-case leading-snug tracking-normal text-popover-foreground opacity-0 shadow-xl transition-all duration-150 group-hover/tip:translate-y-0 group-hover/tip:opacity-100 group-focus/tip:translate-y-0 group-focus/tip:opacity-100"
+        className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-max max-w-[220px] -translate-x-1/2 translate-y-1 rounded-lg border bg-popover px-2.5 py-1.5 text-left font-sans text-[11px] font-normal normal-case leading-snug tracking-normal text-popover-foreground opacity-0 shadow-xl transition-all duration-150 group-hover/tip:translate-y-0 group-hover/tip:opacity-100 group-focus/tip:translate-y-0 group-focus/tip:opacity-100"
       >
         {label}
         <span className="absolute left-1/2 top-full h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r bg-popover" />

@@ -151,7 +151,7 @@ function AppContent() {
                   />
                 </div>
                 <Select value={sort} onValueChange={v => setSort(v as SortKey)}>
-                  <SelectTrigger className="h-10 sm:w-56">
+                  <SelectTrigger className="h-10 sm:w-56 focus:ring-0 focus:ring-offset-0">
                     <span className="text-muted-foreground">Urutkan:&nbsp;</span>
                     <SelectValue />
                   </SelectTrigger>
@@ -166,7 +166,7 @@ function AppContent() {
               {/* filters: provider + payment dropdowns, region toggle — one tidy row */}
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Select value={filter ?? 'all'} onValueChange={v => setFilter(v === 'all' ? null : v)}>
-                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs">
+                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0">
                     <span className="text-muted-foreground">Provider:&nbsp;</span>
                     <SelectValue />
                   </SelectTrigger>
@@ -179,7 +179,7 @@ function AppContent() {
                 </Select>
 
                 <Select value={payment} onValueChange={v => setPayment(v as PaymentMethod | 'all')}>
-                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs">
+                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0">
                     <span className="text-muted-foreground">Bayar:&nbsp;</span>
                     <SelectValue />
                   </SelectTrigger>
@@ -196,7 +196,19 @@ function AppContent() {
                   const active = region === r
                   return (
                     <Chip key={r} active={active} onClick={() => setRegion(active ? 'all' : r)}>
-                      {REGION_LABELS[r]}
+                      {r === 'local' ? (
+                        <span className="inline-flex items-center gap-1">
+                          <span className="inline-block w-3.5 h-2.5 rounded-xs overflow-hidden align-middle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]">
+                            <svg viewBox="0 0 3 2" className="w-full h-full block"><rect fill="#e70011" width="3" height="1"/><rect fill="#fff" y="1" width="3" height="1"/></svg>
+                          </span>
+                          {REGION_LABELS[r]}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1">
+                          <span className="text-[13px]">🌐</span>
+                          {REGION_LABELS[r]}
+                        </span>
+                      )}
                     </Chip>
                   )
                 })}

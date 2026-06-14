@@ -62,8 +62,8 @@ export type Region = 'local' | 'global';
 export type PaymentMethod = 'qris' | 'transfer' | 'ewallet' | 'cc' | 'paypal' | 'crypto';
 
 export const REGION_LABELS: Record<Region, string> = {
-  local: '🇮🇩 Lokal',
-  global: '🌐 Global',
+  local: 'Lokal',
+  global: 'Global',
 };
 
 export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
