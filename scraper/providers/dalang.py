@@ -35,6 +35,7 @@ PER_SPEED_STEP = 20_000         # per +20 Mbps above the free 20 Mbps
 FREE_STORAGE_GB = 20
 FREE_SPEED_MBPS = 20
 TAX = 0.11  # PPN — Dalang's headline price is the tax-inclusive TOTAL
+ANNUAL_DISCOUNT = 0.15  # Dalang gives 15% off for annual billing
 
 
 def monthly_price(vcpu: int, ram_gb: int, storage_gb: int, speed_mbps: int) -> int:
@@ -71,7 +72,7 @@ def scrape() -> list[dict]:
             "price_original": None,
             "discount_pct": None,
             "setup_fee": None,
-            "price_annual_monthly": None,
+            "price_annual_monthly": round(price * (1 - ANNUAL_DISCOUNT)),
             "currency": p["currency"],
             "url": p["url"],
             "scraped_at": ts,

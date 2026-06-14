@@ -42,7 +42,7 @@ def scrape() -> list[dict]:
             "price_original": original,
             "discount_pct": discount_pct,
             "setup_fee": None,
-            "price_annual_monthly": None,
+            "price_annual_monthly": p.get("price_annual"),
             "currency": p["currency"],
             "url": p["url"],
             "scraped_at": ts,

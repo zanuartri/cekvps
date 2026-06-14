@@ -39,6 +39,13 @@ SPECS = {
 # Monthly offer in the JSON-LD: name "XXS (Bulanan)" ... price 90000
 _OFFER = re.compile(r'"name":"(XXS|XS|S|M|L|XL) \(Bulanan\)"[^}]*?"price":(\d+)')
 
+ANNUAL_DISCOUNT = 0.22  # CloudKilat gives 22% off for annual (Tahunan) billing
+
+
+def _annual_monthly(monthly: int) -> int:
+    """Effective /month price on the annual term."""
+    return round(monthly * (1 - ANNUAL_DISCOUNT))
+
 
 def scrape() -> list[dict]:
     """Scrape CloudKilat Kilat VPS monthly prices from the page's JSON-LD."""
@@ -80,7 +87,7 @@ def _row(name: str, spec: dict, price: int, ts: str) -> dict:
         "price_original": None,
         "discount_pct": None,
         "setup_fee": None,
-        "price_annual_monthly": None,
+        "price_annual_monthly": _annual_monthly(price),
         "currency": "IDR",
         "url": BASE_URL,
         "scraped_at": ts,
@@ -103,7 +110,7 @@ def _fallback() -> list[dict]:
             "price_original": None,
             "discount_pct": None,
             "setup_fee": None,
-            "price_annual_monthly": None,
+            "price_annual_monthly": _annual_monthly(p["price"]),
             "currency": p["currency"],
             "url": p["url"],
             "scraped_at": ts,

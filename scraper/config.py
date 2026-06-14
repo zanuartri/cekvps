@@ -99,13 +99,16 @@ FALLBACK_VPS = {
     # 1-month-term price shown in the cards is computed client-side — so it is not
     # in the static HTML and can't be scraped reliably. We curate the 1-month-term
     # numbers: `price` is the promo /bln, `price_orig` is the renewal (non-promo)
-    # /bln, so we surface the advertised discount. All tiers ship NVMe + the listed
-    # bandwidth as TB. Update when Hostinger changes the 1-month pricing.
+    # /bln, so we surface the advertised discount. `price_annual` is the cheaper
+    # long-term promo /bln (24-month tier) shown as the "jika tahunan" hint — note
+    # Hostinger's term discount isn't flat (KVM 1/2 ~30%, KVM 4/8 ~50%), so it's
+    # explicit per tier. All tiers ship NVMe + the listed bandwidth as TB.
+    # Update when Hostinger changes the 1-month pricing.
     "hostinger": [
-        {"plan": "KVM 1", "vcpu": 1, "ram_gb": 4,  "storage_gb": 50,  "storage_type": "NVMe", "bandwidth_tb": 4,  "price": 193900, "price_orig": 320900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
-        {"plan": "KVM 2", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "NVMe", "bandwidth_tb": 8,  "price": 252900, "price_orig": 407900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
-        {"plan": "KVM 4", "vcpu": 4, "ram_gb": 16, "storage_gb": 200, "storage_type": "NVMe", "bandwidth_tb": 16, "price": 485900, "price_orig": 679900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
-        {"plan": "KVM 8", "vcpu": 8, "ram_gb": 32, "storage_gb": 400, "storage_type": "NVMe", "bandwidth_tb": 32, "price": 970900, "price_orig": 1203900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 1", "vcpu": 1, "ram_gb": 4,  "storage_gb": 50,  "storage_type": "NVMe", "bandwidth_tb": 4,  "price": 193900, "price_orig": 320900,  "price_annual": 135900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 2", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "NVMe", "bandwidth_tb": 8,  "price": 252900, "price_orig": 407900,  "price_annual": 180900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 4", "vcpu": 4, "ram_gb": 16, "storage_gb": 200, "storage_type": "NVMe", "bandwidth_tb": 16, "price": 485900, "price_orig": 679900,  "price_annual": 244900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 8", "vcpu": 8, "ram_gb": 32, "storage_gb": 400, "storage_type": "NVMe", "bandwidth_tb": 32, "price": 970900, "price_orig": 1203900, "price_annual": 488900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
     ],
     # DomaiNesia "Cirrus" Cloud Hosting (managed, but dedicated CPU/RAM + NVMe +
     # SSH, so VPS-adjacent). The /cloud-hosting/ page is scrapable; this is the
