@@ -1,16 +1,28 @@
 import { useState } from 'react'
+import { Search } from 'lucide-react'
 import { CurrencyProvider } from '@/context/CurrencyContext'
 import { useVPSData } from '@/hooks/useVPSData'
 import { PROVIDER_NAMES } from '@/lib/types'
 import Hero from '@/components/Hero'
 import CurrencyToggle from '@/components/CurrencyToggle'
-import VPSGrid from '@/components/VPSGrid'
+import VPSGrid, { type SortKey } from '@/components/VPSGrid'
 import Calculator from '@/components/Calculator'
 import DeployCost from '@/components/DeployCost'
 import FAQ from '@/components/FAQ'
 import Support from '@/components/Support'
 import { Button } from '@/components/ui/button'
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from '@/components/ui/select'
 import { SITE, SAWERIA_URL, AFFILIATE_DISCLOSURE } from '@/lib/site'
+
+const SORT_OPTIONS: { value: SortKey; label: string }[] = [
+  { value: 'price-asc', label: 'Termurah' },
+  { value: 'price-desc', label: 'Termahal' },
+  { value: 'ram-desc', label: 'RAM terbanyak' },
+  { value: 'cpu-desc', label: 'vCPU terbanyak' },
+  { value: 'value', label: 'Best value (harga/GB RAM)' },
+]
 
 const NAV_LINKS = [
   { href: '#vps', label: 'Bandingkan' },
@@ -31,32 +43,36 @@ function SectionHeading({ eyebrow, title, desc }: { eyebrow: string; title: stri
 function AppContent() {
   const { vps, lastRun, loading, error } = useVPSData()
   const [filter, setFilter] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
+  const [sort, setSort] = useState<SortKey>('price-asc')
 
   const providers = [...new Set(vps.map(p => p.provider))]
 
   return (
     <div className="min-h-screen bg-background">
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 border-b bg-background/75 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 h-14">
+      <nav className="sticky top-0 z-50 border-b border-border/70 bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 h-16">
           <a href="#top" className="flex items-center gap-2 font-bold tracking-tight">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-violet-500 text-sm text-white shadow-sm">C</span>
-            <span>CekVPS</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-violet-500 text-sm text-white shadow-sm shadow-primary/30">C</span>
+            <span className="text-[15px]">CekVPS</span>
           </a>
-          <div className="hidden items-center gap-1 md:flex">
+
+          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
             {NAV_LINKS.map(l => (
               <a
                 key={l.href}
                 href={l.href}
-                className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:bg-accent"
+                className="rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 {l.label}
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-2 sm:gap-3">
+
+          <div className="flex items-center gap-2 sm:gap-2.5">
             <CurrencyToggle />
-            <Button asChild size="sm" className="font-medium">
+            <Button asChild size="sm" className="h-9 font-semibold shadow-sm shadow-primary/20">
               <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">☕ Dukung</a>
             </Button>
           </div>
@@ -64,9 +80,9 @@ function AppContent() {
       </nav>
 
       <div id="top" />
-      <Hero lastRun={lastRun} providerCount={providers.length} planCount={vps.length} />
+      <Hero vps={vps} lastRun={lastRun} />
 
-      <main className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20 space-y-20 sm:space-y-24">
+      <main className="mx-auto max-w-6xl px-4 sm:px-6 pt-24 pb-16 sm:pt-32 sm:pb-24 space-y-20 sm:space-y-24">
         {/* Loading */}
         {loading && (
           <div className="flex flex-col items-center justify-center gap-4 py-24 text-muted-foreground">
@@ -88,19 +104,45 @@ function AppContent() {
             {/* Comparison */}
             <section id="vps" className="scroll-mt-20">
               <SectionHeading
-                eyebrow="Komparasi"
-                title="Harga VPS dalam satu halaman"
-                desc="Harga per bulan dari provider lokal & global. Klik plan untuk deploy langsung di provider."
+                eyebrow="Bandingkan"
+                title="Semua VPS dalam satu daftar"
+                desc="Cari, urutkan, lalu buka langsung ke provider. Harga per bulan dari provider lokal dan global."
               />
+
+              {/* search + sort toolbar */}
+              <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="relative flex-1">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                    placeholder="Cari provider, plan, atau spek… (mis. '8gb', 'contabo')"
+                    className="h-10 w-full rounded-lg border bg-card pl-9 pr-3 text-sm shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring/30"
+                  />
+                </div>
+                <Select value={sort} onValueChange={v => setSort(v as SortKey)}>
+                  <SelectTrigger className="h-10 sm:w-56">
+                    <span className="text-muted-foreground">Urutkan:&nbsp;</span>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SORT_OPTIONS.map(o => (
+                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
               {/* filter chips */}
-              <div className="mb-6 flex flex-wrap gap-2">
+              <div className="mb-4 flex flex-wrap gap-2">
                 {['all', ...providers].map(p => {
                   const active = filter === (p === 'all' ? null : p)
                   return (
                     <button
                       key={p}
                       onClick={() => setFilter(p === 'all' ? null : p)}
-                      className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                      className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                         active
                           ? 'border-primary bg-primary text-primary-foreground shadow-sm'
                           : 'bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground'
@@ -111,16 +153,17 @@ function AppContent() {
                   )
                 })}
               </div>
-              <VPSGrid vps={vps} filter={filter} />
+
+              <VPSGrid vps={vps} filter={filter} query={query} sort={sort} />
             </section>
 
             {/* Calculator */}
             {vps.length > 0 && (
               <section id="calculator" className="scroll-mt-20">
                 <SectionHeading
-                  eyebrow="Tools"
+                  eyebrow="Kalkulator"
                   title="Bisa jalanin app-ku gak?"
-                  desc="Geser kebutuhan RAM & CPU, kami carikan VPS termurah yang sanggup menjalankannya."
+                  desc="Geser kebutuhan RAM dan CPU, kami carikan VPS termurah yang sanggup menjalankannya."
                 />
                 <Calculator vps={vps} />
               </section>
@@ -130,9 +173,9 @@ function AppContent() {
             {vps.length > 0 && (
               <section id="deploy-cost" className="scroll-mt-20">
                 <SectionHeading
-                  eyebrow="Tools"
-                  title="Estimasi biaya deploy"
-                  desc="Pilih provider & plan untuk lihat estimasi biaya bulan pertama."
+                  eyebrow="Estimasi Biaya"
+                  title="Estimasi biaya bulan pertama"
+                  desc="Pilih provider dan plan untuk lihat estimasi biaya bulan pertama."
                 />
                 <DeployCost vps={vps} />
               </section>
@@ -146,7 +189,7 @@ function AppContent() {
             {/* FAQ */}
             <section id="faq" className="scroll-mt-20">
               <SectionHeading
-                eyebrow="Bantuan"
+                eyebrow="FAQ"
                 title="Pertanyaan umum"
                 desc="Soal data, harga, dan cara kerja CekVPS."
               />
@@ -191,7 +234,7 @@ function AppContent() {
           <div className="mt-10 space-y-3 border-t pt-6 text-xs text-muted-foreground">
             <p className="leading-relaxed">{AFFILIATE_DISCLOSURE}</p>
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-              <p>© {new Date().getFullYear()} {SITE.name}. Harga bisa berubah — cek ulang di provider.</p>
+              <p>© {new Date().getFullYear()} {SITE.name}. Harga bisa berubah, cek ulang di provider.</p>
               {lastRun && (
                 <p>
                   Update terakhir:{' '}

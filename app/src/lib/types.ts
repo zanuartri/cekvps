@@ -74,7 +74,7 @@ export function fmtPrice(amount: number, currency: CurrencyCode): string {
 }
 
 export function fmtStorage(gb: number): string {
-  if (!gb) return '—';
+  if (!gb) return '-';
   return gb >= 1000 ? `${(gb / 1000).toFixed(1)} TB` : `${gb} GB`;
 }
 

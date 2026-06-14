@@ -1,9 +1,10 @@
 import { useState, useMemo, type ReactNode } from 'react'
 import type { VPSPlan } from '@/lib/types'
 import { useCurrency } from '@/context/CurrencyContext'
-import { convertPrice, fmtPrice, fmtStorage, PROVIDER_NAMES, PROVIDER_COLORS } from '@/lib/types'
+import { convertPrice, fmtPrice, fmtStorage, PROVIDER_NAMES } from '@/lib/types'
 import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
 import { Slider } from '@/components/ui/slider'
+import ProviderLogo from '@/components/ProviderLogo'
 
 interface CalculatorProps {
   vps: VPSPlan[]
@@ -44,7 +45,6 @@ export default function Calculator({ vps }: CalculatorProps) {
             {matches.map((p, i) => {
               const price = convertPrice(p.price_monthly, p.currency as any, currency)
               const name = PROVIDER_NAMES[p.provider] || p.provider
-              const gradient = PROVIDER_COLORS[p.provider] || 'from-slate-500 to-slate-700'
               const outUrl = buildAffiliateUrl(p.provider, p.url)
               return (
                 <a
@@ -52,7 +52,7 @@ export default function Calculator({ vps }: CalculatorProps) {
                   href={outUrl}
                   target="_blank"
                   rel={isAffiliate(p.provider) ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
-                  className="group relative flex flex-col gap-2 rounded-xl border bg-background p-4 transition-all hover:border-primary/40 hover:shadow-md"
+                  className="group relative flex flex-col gap-2 rounded-lg border bg-secondary/40 p-4 transition-all hover:border-primary/50 hover:bg-secondary/70"
                 >
                   {i === 0 && (
                     <span className="absolute -top-2 left-3 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-foreground shadow-sm">
@@ -60,9 +60,7 @@ export default function Calculator({ vps }: CalculatorProps) {
                     </span>
                   )}
                   <div className="flex items-center gap-2">
-                    <span className={`flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br ${gradient} text-xs font-bold text-white`}>
-                      {name.charAt(0)}
-                    </span>
+                    <ProviderLogo provider={p.provider} size={28} rounded="rounded-lg" />
                     <span className="truncate text-sm font-semibold">{name}</span>
                   </div>
                   <p className="text-xs text-muted-foreground">{p.plan}</p>
@@ -71,7 +69,7 @@ export default function Calculator({ vps }: CalculatorProps) {
                   </div>
                   <div className="mt-1 flex items-center justify-between">
                     <span className="font-mono text-base font-bold tabular-nums">{fmtPrice(price, currency)}<span className="text-xs font-normal text-muted-foreground">/bln</span></span>
-                    <span className="text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">Deploy ↗</span>
+                    <span className="text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">Lihat ↗</span>
                   </div>
                 </a>
               )

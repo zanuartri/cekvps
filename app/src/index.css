@@ -2,49 +2,31 @@
 
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
-
+/*
+ * Theme: "CekVPS Dark" — adapted from the Hostinger Dark design system.
+ * Dark neutral canvas, raised dark surfaces, vivid purple accent, DM Sans.
+ * See DESIGN.md for the full spec.
+ */
 :root {
-  --background: oklch(0.994 0.0015 270);
-  --foreground: oklch(0.24 0.02 270);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.02 270);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.02 270);
-  --primary: oklch(0.52 0.21 277);
-  --primary-foreground: oklch(0.99 0.003 277);
-  --secondary: oklch(0.97 0.006 270);
-  --secondary-foreground: oklch(0.34 0.02 270);
-  --muted: oklch(0.972 0.005 270);
-  --muted-foreground: oklch(0.56 0.018 270);
-  --accent: oklch(0.96 0.025 277);
-  --accent-foreground: oklch(0.45 0.2 277);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0.006 270);
-  --input: oklch(0.922 0.006 270);
-  --ring: oklch(0.52 0.21 277);
-  --radius: 0.875rem;
-}
-
-.dark {
-  --background: oklch(0.17 0.015 270);
-  --foreground: oklch(0.97 0.005 270);
-  --card: oklch(0.21 0.018 270);
-  --card-foreground: oklch(0.97 0.005 270);
-  --popover: oklch(0.21 0.018 270);
-  --popover-foreground: oklch(0.97 0.005 270);
-  --primary: oklch(0.66 0.2 277);
-  --primary-foreground: oklch(0.16 0.02 277);
-  --secondary: oklch(0.27 0.02 270);
-  --secondary-foreground: oklch(0.97 0.005 270);
-  --muted: oklch(0.27 0.02 270);
-  --muted-foreground: oklch(0.7 0.02 270);
-  --accent: oklch(0.3 0.05 277);
-  --accent-foreground: oklch(0.85 0.1 277);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.66 0.2 277);
+  --background: #121212;          /* neutral canvas */
+  --foreground: #ffffff;          /* on-surface */
+  --card: #1a1a1a;                /* surface-raised */
+  --card-foreground: #ffffff;
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
+  --primary: #673de6;            /* brand purple */
+  --primary-foreground: #ffffff;
+  --secondary: #222225;          /* tertiary surface */
+  --secondary-foreground: #ffffff;
+  --muted: #222225;
+  --muted-foreground: #b7b7bd;   /* on-surface muted */
+  --accent: #221c3a;             /* subtle violet hover tint */
+  --accent-foreground: #7b66ff;
+  --destructive: #e5484d;
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: #7b66ff;               /* outline */
+  --radius: 0.75rem;
 }
 
 @theme inline {
@@ -66,11 +48,15 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Hostinger radius scale: controls 8px, cards 24px, pills full */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
+  --radius-2xl: 24px;
+
+  --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
@@ -79,9 +65,8 @@
   html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "cv11", "ss01";
   }
-  ::selection { @apply bg-primary/20; }
+  ::selection { @apply bg-primary/30; }
 }
 
 /* numeric/spec text */
@@ -90,8 +75,8 @@
 /* subtle grid backdrop for hero */
 .bg-grid {
   background-image:
-    linear-gradient(to right, oklch(0.52 0.21 277 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.52 0.21 277 / 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgb(123 102 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(123 102 255 / 0.07) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);

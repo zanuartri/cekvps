@@ -3,6 +3,7 @@ import type { VPSPlan } from '@/lib/types'
 import { useCurrency } from '@/context/CurrencyContext'
 import { convertPrice, fmtPrice, PROVIDER_NAMES } from '@/lib/types'
 import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
+import ProviderLogo from '@/components/ProviderLogo'
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select'
@@ -50,7 +51,7 @@ export default function DeployCost({ vps }: DeployCostProps) {
             <SelectContent>
               {plans.map(p => (
                 <SelectItem key={p.plan} value={p.plan}>
-                  {p.plan} — {fmtPrice(convertPrice(p.price_monthly, p.currency as any, currency), currency)}/bln
+                  {p.plan} · {fmtPrice(convertPrice(p.price_monthly, p.currency as any, currency), currency)}/bln
                 </SelectItem>
               ))}
             </SelectContent>
@@ -59,10 +60,17 @@ export default function DeployCost({ vps }: DeployCostProps) {
       </div>
 
       {selectedVPS ? (
-        <div className="mt-6 rounded-xl border bg-gradient-to-br from-primary/[0.04] to-violet-500/[0.04] p-5">
+        <div className="mt-6 rounded-xl border bg-gradient-to-br from-primary/[0.12] to-violet-500/[0.08] p-5">
+          <div className="mb-4 flex items-center gap-3">
+            <ProviderLogo provider={selectedVPS.provider} size={40} />
+            <div className="min-w-0">
+              <div className="truncate text-sm font-semibold">{PROVIDER_NAMES[selectedVPS.provider] || selectedVPS.provider}</div>
+              <div className="text-xs text-muted-foreground">{selectedVPS.plan}</div>
+            </div>
+          </div>
           <div className="grid grid-cols-3 gap-3">
             <Cell label="VPS / bln" value={fmtPrice(vpsPrice, currency)} />
-            <Cell label="Setup fee" value="Gratis" accent="text-emerald-600" />
+            <Cell label="Setup fee" value="Gratis" accent="text-emerald-400" />
             <Cell label="Total bulan ini" value={fmtPrice(vpsPrice, currency)} accent="text-primary" highlight />
           </div>
           <div className="mt-4 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
@@ -75,7 +83,7 @@ export default function DeployCost({ vps }: DeployCostProps) {
               rel={isAffiliate(selectedVPS.provider) ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
               className="shrink-0 text-sm font-medium text-primary hover:underline"
             >
-              Deploy sekarang ↗
+              Lihat di provider ↗
             </a>
           </div>
         </div>
