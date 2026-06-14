@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Search } from 'lucide-react'
 import { CurrencyProvider } from '@/context/CurrencyContext'
 import { useVPSData } from '@/hooks/useVPSData'
-import { PROVIDER_NAMES } from '@/lib/types'
+import { PROVIDER_NAMES, REGION_LABELS } from '@/lib/types'
+import type { Region, PaymentMethod } from '@/lib/types'
 import Hero from '@/components/Hero'
 import CurrencyToggle from '@/components/CurrencyToggle'
 import VPSGrid, { type SortKey } from '@/components/VPSGrid'
@@ -24,6 +25,17 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'value', label: 'Best value (harga/GB RAM)' },
 ]
 
+const PAYMENT_OPTIONS: { value: PaymentMethod | 'all'; label: string }[] = [
+  { value: 'all', label: 'Semua metode' },
+  { value: 'qris', label: 'QRIS' },
+  { value: 'transfer', label: 'Transfer Bank' },
+  { value: 'ewallet', label: 'E-wallet' },
+  { value: 'cc', label: 'Kartu Kredit' },
+  { value: 'paypal', label: 'PayPal' },
+  { value: 'crypto', label: 'Crypto' },
+]
+
+
 const NAV_LINKS = [
   { href: '#vps', label: 'Bandingkan' },
   { href: '#calculator', label: 'Kalkulator' },
@@ -40,11 +52,28 @@ function SectionHeading({ eyebrow, title, desc }: { eyebrow: string; title: stri
   )
 }
 
+function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+        active
+          ? 'border-primary bg-primary text-primary-foreground shadow-sm'
+          : 'bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}
+
 function AppContent() {
   const { vps, lastRun, loading, error } = useVPSData()
   const [filter, setFilter] = useState<string | null>(null)
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<SortKey>('price-asc')
+  const [region, setRegion] = useState<Region | 'all'>('all')
+  const [payment, setPayment] = useState<PaymentMethod | 'all'>('all')
 
   const providers = [...new Set(vps.map(p => p.provider))]
 
@@ -134,27 +163,46 @@ function AppContent() {
                 </Select>
               </div>
 
-              {/* filter chips */}
-              <div className="mb-4 flex flex-wrap gap-2">
-                {['all', ...providers].map(p => {
-                  const active = filter === (p === 'all' ? null : p)
+              {/* filters: provider + payment dropdowns, region toggle — one tidy row */}
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <Select value={filter ?? 'all'} onValueChange={v => setFilter(v === 'all' ? null : v)}>
+                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs">
+                    <span className="text-muted-foreground">Provider:&nbsp;</span>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Semua provider</SelectItem>
+                    {providers.map(p => (
+                      <SelectItem key={p} value={p}>{PROVIDER_NAMES[p] || p}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={payment} onValueChange={v => setPayment(v as PaymentMethod | 'all')}>
+                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs">
+                    <span className="text-muted-foreground">Bayar:&nbsp;</span>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PAYMENT_OPTIONS.map(o => (
+                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <span className="mx-0.5 hidden h-5 w-px bg-border sm:block" />
+
+                {(['local', 'global'] as Region[]).map(r => {
+                  const active = region === r
                   return (
-                    <button
-                      key={p}
-                      onClick={() => setFilter(p === 'all' ? null : p)}
-                      className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-                        active
-                          ? 'border-primary bg-primary text-primary-foreground shadow-sm'
-                          : 'bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground'
-                      }`}
-                    >
-                      {p === 'all' ? 'Semua' : PROVIDER_NAMES[p] || p}
-                    </button>
+                    <Chip key={r} active={active} onClick={() => setRegion(active ? 'all' : r)}>
+                      {REGION_LABELS[r]}
+                    </Chip>
                   )
                 })}
               </div>
 
-              <VPSGrid vps={vps} filter={filter} query={query} sort={sort} />
+              <VPSGrid vps={vps} filter={filter} query={query} sort={sort} region={region} payment={payment} />
             </section>
 
             {/* Calculator */}

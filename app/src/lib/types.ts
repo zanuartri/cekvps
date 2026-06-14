@@ -55,6 +55,50 @@ export const PROVIDER_COLORS: Record<string, string> = {
   vultr: 'from-sky-500 to-indigo-600',
 };
 
+// --- Provider metadata: region & metode pembayaran ---
+// Catatan: metode pembayaran bersifat indikatif. Yang lokal (Indonesia) terima QRIS;
+// yang global umumnya kartu kredit/PayPal. Selalu cek final di halaman provider.
+export type Region = 'local' | 'global';
+export type PaymentMethod = 'qris' | 'transfer' | 'ewallet' | 'cc' | 'paypal' | 'crypto';
+
+export const REGION_LABELS: Record<Region, string> = {
+  local: '🇮🇩 Lokal',
+  global: '🌐 Global',
+};
+
+export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
+  qris: 'QRIS',
+  transfer: 'Transfer Bank',
+  ewallet: 'E-wallet',
+  cc: 'Kartu Kredit',
+  paypal: 'PayPal',
+  crypto: 'Crypto',
+};
+
+export interface ProviderMeta {
+  region: Region;
+  payments: PaymentMethod[];
+}
+
+export const PROVIDER_META: Record<string, ProviderMeta> = {
+  contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer', 'crypto'] },
+  hetzner: { region: 'global', payments: ['cc', 'paypal', 'transfer'] },
+  digitalocean: { region: 'global', payments: ['cc', 'paypal'] },
+  hostinger: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
+  idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
+  biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
+  alibaba: { region: 'global', payments: ['cc', 'paypal'] },
+  tencent: { region: 'global', payments: ['cc', 'paypal'] },
+  dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
+  vultr: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
+};
+
+export const DEFAULT_META: ProviderMeta = { region: 'global', payments: ['cc'] };
+
+export function providerMeta(provider: string): ProviderMeta {
+  return PROVIDER_META[provider] ?? DEFAULT_META;
+}
+
 export function convertPrice(amount: number, from: CurrencyCode, to: CurrencyCode): number {
   if (from === to) return amount;
   const idr = from === 'IDR' ? amount : amount * FX[from].toIDR;

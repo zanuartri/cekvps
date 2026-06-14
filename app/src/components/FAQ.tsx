@@ -20,6 +20,12 @@ const FAQS: { q: string; a: string }[] = [
       'Selalu cek harga final di halaman provider sebelum membeli.',
   },
   {
+    q: 'Metode pembayaran yang ditampilkan akurat?',
+    a: 'Bersifat indikatif. Provider lokal (Biznet Gio, IDCloudHost, Dalang.io) umumnya menerima QRIS, ' +
+      'transfer bank, dan e-wallet; provider global biasanya kartu kredit atau PayPal. ' +
+      'Cek metode final di halaman checkout provider sebelum bayar.',
+  },
+  {
     q: 'Provider saya belum ada. Bisa ditambah?',
     a: 'Bisa! Kirim masukan lewat email atau GitHub dan kami usahakan tambahkan.',
   },

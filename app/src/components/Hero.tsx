@@ -66,7 +66,7 @@ export default function Hero({ vps, lastRun }: HeroProps) {
           {/* trust strip — avatar stack */}
           <div className="mt-8 flex items-center justify-center gap-3 lg:justify-start">
             <div className="flex -space-x-2.5">
-              {providers.slice(0, 8).map(p => (
+              {providers.slice(0, 7).map(p => (
                 <ProviderLogo
                   key={p}
                   provider={p}
@@ -75,6 +75,11 @@ export default function Hero({ vps, lastRun }: HeroProps) {
                   className="ring-2 ring-background"
                 />
               ))}
+              {providers.length > 7 && (
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-[10px] font-semibold text-muted-foreground ring-2 ring-background">
+                  +{providers.length - 7}
+                </span>
+              )}
             </div>
             <span className="text-xs text-muted-foreground">{providers.length} provider lokal & global</span>
           </div>

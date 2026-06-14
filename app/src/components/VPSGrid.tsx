@@ -1,7 +1,8 @@
 import { useMemo, type ReactNode } from 'react'
 import type { VPSPlan } from '@/lib/types'
 import { useCurrency } from '@/context/CurrencyContext'
-import { convertPrice, fmtPrice, fmtStorage, fmtBandwidth, PROVIDER_NAMES } from '@/lib/types'
+import { convertPrice, fmtPrice, fmtStorage, fmtBandwidth, PROVIDER_NAMES, PAYMENT_LABELS, providerMeta } from '@/lib/types'
+import type { Region, PaymentMethod } from '@/lib/types'
 import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
 import ProviderLogo from '@/components/ProviderLogo'
 
@@ -12,9 +13,11 @@ interface VPSGridProps {
   filter: string | null
   query: string
   sort: SortKey
+  region: Region | 'all'
+  payment: PaymentMethod | 'all'
 }
 
-export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc' }: VPSGridProps) {
+export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', region = 'all', payment = 'all' }: VPSGridProps) {
   const { currency } = useCurrency()
 
   const rows = useMemo(() => {
@@ -23,6 +26,9 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc' }:
 
     const filtered = vps.filter(p => {
       if (filter && p.provider !== filter) return false
+      const meta = providerMeta(p.provider)
+      if (region !== 'all' && meta.region !== region) return false
+      if (payment !== 'all' && !meta.payments.includes(payment)) return false
       if (!q) return true
       const hay = `${PROVIDER_NAMES[p.provider] || p.provider} ${p.plan} ${p.vcpu}vcpu ${p.ram_gb}gb ${p.storage_gb} ${p.storage_type}`.toLowerCase()
       return hay.includes(q)
@@ -38,7 +44,7 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc' }:
       }
     })
     return sorted
-  }, [vps, filter, query, sort, currency])
+  }, [vps, filter, query, sort, region, payment, currency])
 
   if (!rows.length) {
     return (
@@ -70,6 +76,7 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc' }:
           const partner = isAffiliate(p.provider)
           const outUrl = buildAffiliateUrl(p.provider, p.url)
           const isCheapest = p === cheapest
+          const meta = providerMeta(p.provider)
 
           return (
             <div
@@ -82,6 +89,9 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc' }:
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
                     <span className="truncate text-sm font-semibold">{name}</span>
+                    {meta.region === 'local' && (
+                      <span className="shrink-0 rounded-full bg-sky-400/15 px-1.5 py-px text-[10px] font-semibold uppercase tracking-wide text-sky-300">Lokal</span>
+                    )}
                     {partner && (
                       <span className="shrink-0 rounded-full bg-amber-400/15 px-1.5 py-px text-[10px] font-semibold uppercase tracking-wide text-amber-300">Partner</span>
                     )}
@@ -94,11 +104,18 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc' }:
               </div>
 
               {/* specs */}
-              <div className="flex flex-wrap gap-1.5">
-                <Spec>{p.vcpu} vCPU</Spec>
-                <Spec>{fmtStorage(p.ram_gb)} RAM</Spec>
-                <Spec>{fmtStorage(p.storage_gb)} {p.storage_type}</Spec>
-                <Spec>{fmtBandwidth(p.bandwidth_tb)}</Spec>
+              <div>
+                <div className="flex flex-wrap gap-1.5">
+                  <Spec>{p.vcpu} vCPU</Spec>
+                  <Spec>{fmtStorage(p.ram_gb)} RAM</Spec>
+                  <Spec>{fmtStorage(p.storage_gb)} {p.storage_type}</Spec>
+                  <InfoTip label="Kuota transfer data keluar/masuk per bulan. Unlimited = tidak dibatasi, biasanya tetap kena fair-use policy.">
+                    <Spec>{p.bandwidth_tb === null ? 'Transfer unlimited' : `Transfer ${fmtBandwidth(p.bandwidth_tb)}`}</Spec>
+                  </InfoTip>
+                </div>
+                <div className="mt-1.5 text-[11px] text-muted-foreground">
+                  Bayar: {meta.payments.map(m => PAYMENT_LABELS[m]).join(' · ')}
+                </div>
               </div>
 
               {/* price + deploy */}
@@ -130,6 +147,22 @@ function Spec({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-md bg-secondary px-1.5 py-0.5 font-mono text-[11px] font-medium tabular-nums text-secondary-foreground">
       {children}
+    </span>
+  )
+}
+
+/** Custom tooltip (hover/focus) — styled to match the dark theme, no native title. */
+function InfoTip({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <span className="group/tip relative inline-flex" tabIndex={0}>
+      {children}
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 w-max max-w-[220px] -translate-x-1/2 translate-y-1 rounded-lg border bg-popover px-2.5 py-1.5 text-left font-sans text-[11px] font-normal normal-case leading-snug tracking-normal text-popover-foreground opacity-0 shadow-xl transition-all duration-150 group-hover/tip:translate-y-0 group-hover/tip:opacity-100 group-focus/tip:translate-y-0 group-focus/tip:opacity-100"
+      >
+        {label}
+        <span className="absolute left-1/2 top-full h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r bg-popover" />
+      </span>
     </span>
   )
 }
