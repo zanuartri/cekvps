@@ -37,7 +37,7 @@ const PAYMENT_OPTIONS: { value: PaymentMethod | 'all'; label: string }[] = [
 
 const NAV_LINKS = [
   { href: '#vps', label: 'Bandingkan' },
-  { href: '#calculator', label: 'Kalkulator' },
+  { href: '#calculator', label: 'Cari' },
   { href: '#faq', label: 'FAQ' },
 ]
 
@@ -221,7 +221,7 @@ function AppContent() {
             {vps.length > 0 && (
               <section id="calculator" className="scroll-mt-20">
                 <SectionHeading
-                  eyebrow="Kalkulator"
+                  eyebrow="Cari sesuai kebutuhan"
                   title="Bisa jalanin app-ku gak?"
                   desc="Geser kebutuhan RAM dan CPU, kami carikan VPS termurah yang sanggup menjalankannya."
                 />

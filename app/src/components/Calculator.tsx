@@ -67,6 +67,14 @@ export default function Calculator({ vps }: CalculatorProps) {
                   <div className="flex flex-wrap gap-1 font-mono text-[11px] text-muted-foreground">
                     <span>{p.vcpu} vCPU</span>·<span>{fmtStorage(p.ram_gb)}</span>·<span>{fmtStorage(p.storage_gb)}</span>
                   </div>
+                  {p.discount_pct && p.price_original ? (
+                    <div className="flex items-center gap-1.5 leading-none">
+                      <span className="rounded bg-rose-400/15 px-1 py-px text-[10px] font-bold tabular-nums text-rose-300">−{p.discount_pct}%</span>
+                      <span className="font-mono text-[11px] tabular-nums text-muted-foreground line-through">
+                        {fmtPrice(convertPrice(p.price_original, p.currency as any, currency), currency)}
+                      </span>
+                    </div>
+                  ) : null}
                   <div className="mt-1 flex items-center justify-between">
                     <span className="font-mono text-base font-bold tabular-nums">{fmtPrice(price, currency)}<span className="text-xs font-normal text-muted-foreground">/bln</span></span>
                     <span className="text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">Lihat ↗</span>
