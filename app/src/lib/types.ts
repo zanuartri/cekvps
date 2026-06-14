@@ -74,10 +74,8 @@ export const PROVIDER_COLORS: Record<string, string> = {
 };
 
 // --- Provider metadata: region & metode pembayaran ---
-// Metode pembayaran diverifikasi dari halaman/KB resmi tiap provider (Juni 2026).
-// Pengecualian: Sumopod & Dalang belum bisa dikonfirmasi dari sumber publik
-// (checkout di balik login/SPA), jadi nilainya konservatif — cek lagi nanti.
-// Tetap saran ke user: konfirmasi final di halaman checkout provider.
+// Metode pembayaran diverifikasi dari halaman/KB resmi atau halaman checkout
+// tiap provider (Juni 2026). Tetap saran ke user: konfirmasi final di checkout.
 export type Region = 'local' | 'global';
 export type PaymentMethod = 'qris' | 'transfer' | 'ewallet' | 'cc' | 'retail' | 'paypal' | 'crypto';
 
@@ -110,8 +108,8 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal', 'retail'] },
   // kb.biznetgio.com (NEO Cloud): Kartu Kredit (Visa/MC/JCB), Transfer Bank/VA, e-Wallet, QRIS.
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
-  // BELUM terkonfirmasi (checkout di balik CRM/login) — nilai konservatif.
-  dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
+  // Checkout Dalang: Kartu Kredit/Debit (Visa/MC/AMEX/JCB), Retail (Indomaret), E-Wallet (DANA/GoPay/LinkAja), QRIS. Tanpa transfer/VA.
+  dalang: { region: 'local', payments: ['qris', 'ewallet', 'cc', 'retail'] },
   // Model topup; channel dikonfirmasi pemilik situs: QRIS, transfer/VA, e-wallet, kartu kredit, retail (Alfamart).
   sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
   // domainesia.com/pembayaran: VA, e-wallet (GoPay/OVO/DANA/LinkAja/ShopeePay), QRIS, Kartu Kredit, PayPal, Indomaret/Alfamart.
