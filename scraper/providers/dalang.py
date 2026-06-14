@@ -6,14 +6,16 @@ internet speed, and the price is computed client-side — there are no fixed pla
 to scrape. The monthly (pre-tax) price is a clean linear formula, verified
 against the builder:
 
-    price = 20_000 + 20_000 * vCPU + 5_000 * RAM_GB   (at 20 GB NVMe, free 20 Mbps)
+    subtotal = 20_000 + 20_000 * vCPU + 5_000 * RAM_GB   (at 20 GB NVMe, free 20 Mbps)
+    price    = subtotal * 1.11   (PPN 11%, the "TOTAL" the builder shows)
 
-So instead of scraping we serve a few sensible presets from config.FALLBACK_VPS
-that mirror Dalang's own usage hints. We compute each price from the formula
-(authoritative) and assert it matches the curated value, so specs and price can
-never drift apart. Bandwidth is a speed cap (20 Mbps), not a transfer quota, so
-bandwidth_tb stays None (unmetered). Update the presets in config when Dalang
-changes its unit pricing.
+We store the tax-inclusive TOTAL to match Dalang's prominent headline price
+(e.g. "TOTAL Rp 49.950"). So instead of scraping we serve a few sensible presets
+from config.FALLBACK_VPS that mirror Dalang's own usage hints. We compute each
+price from the formula (authoritative) and assert it matches the curated value,
+so specs and price can never drift apart. Bandwidth is a speed cap (20 Mbps), not
+a transfer quota, so bandwidth_tb stays None (unmetered). Update the presets in
+config when Dalang changes its unit pricing.
 """
 import logging
 
@@ -27,10 +29,12 @@ PROVIDER = "dalang"
 BASE = 20_000
 PER_VCPU = 20_000
 PER_RAM_GB = 5_000
+TAX = 0.11  # PPN — Dalang's headline price is the tax-inclusive TOTAL
 
 
 def monthly_price(vcpu: int, ram_gb: int) -> int:
-    return BASE + PER_VCPU * vcpu + PER_RAM_GB * ram_gb
+    subtotal = BASE + PER_VCPU * vcpu + PER_RAM_GB * ram_gb
+    return round(subtotal * (1 + TAX))
 
 
 def scrape() -> list[dict]:

@@ -687,14 +687,14 @@
     "storage_gb": 20,
     "storage_type": "NVMe",
     "bandwidth_tb": null,
-    "price_monthly": 45000,
+    "price_monthly": 49950,
     "price_original": null,
     "discount_pct": null,
     "setup_fee": null,
     "price_annual_monthly": null,
     "currency": "IDR",
     "url": "https://dalang.io/products/vps",
-    "scraped_at": "2026-06-14T16:27:06.007828+00:00"
+    "scraped_at": "2026-06-14T16:30:42.177227+00:00"
   },
   {
     "provider": "dalang",
@@ -704,14 +704,14 @@
     "storage_gb": 20,
     "storage_type": "NVMe",
     "bandwidth_tb": null,
-    "price_monthly": 50000,
+    "price_monthly": 55500,
     "price_original": null,
     "discount_pct": null,
     "setup_fee": null,
     "price_annual_monthly": null,
     "currency": "IDR",
     "url": "https://dalang.io/products/vps",
-    "scraped_at": "2026-06-14T16:27:06.007828+00:00"
+    "scraped_at": "2026-06-14T16:30:42.177227+00:00"
   },
   {
     "provider": "dalang",
@@ -721,14 +721,14 @@
     "storage_gb": 20,
     "storage_type": "NVMe",
     "bandwidth_tb": null,
-    "price_monthly": 80000,
+    "price_monthly": 88800,
     "price_original": null,
     "discount_pct": null,
     "setup_fee": null,
     "price_annual_monthly": null,
     "currency": "IDR",
     "url": "https://dalang.io/products/vps",
-    "scraped_at": "2026-06-14T16:27:06.007828+00:00"
+    "scraped_at": "2026-06-14T16:30:42.177227+00:00"
   },
   {
     "provider": "dalang",
@@ -738,14 +738,14 @@
     "storage_gb": 20,
     "storage_type": "NVMe",
     "bandwidth_tb": null,
-    "price_monthly": 140000,
+    "price_monthly": 155400,
     "price_original": null,
     "discount_pct": null,
     "setup_fee": null,
     "price_annual_monthly": null,
     "currency": "IDR",
     "url": "https://dalang.io/products/vps",
-    "scraped_at": "2026-06-14T16:27:06.007828+00:00"
+    "scraped_at": "2026-06-14T16:30:42.177227+00:00"
   },
   {
     "provider": "dalang",
@@ -755,13 +755,13 @@
     "storage_gb": 20,
     "storage_type": "NVMe",
     "bandwidth_tb": null,
-    "price_monthly": 260000,
+    "price_monthly": 288600,
     "price_original": null,
     "discount_pct": null,
     "setup_fee": null,
     "price_annual_monthly": null,
     "currency": "IDR",
     "url": "https://dalang.io/products/vps",
-    "scraped_at": "2026-06-14T16:27:06.007828+00:00"
+    "scraped_at": "2026-06-14T16:30:42.177227+00:00"
   }
 ]
