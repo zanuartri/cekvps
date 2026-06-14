@@ -112,8 +112,8 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
   // BELUM terkonfirmasi (checkout di balik CRM/login) — nilai konservatif.
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
-  // BELUM terkonfirmasi (model topup, dashboard auth-gated) — nilai konservatif.
-  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
+  // Model topup; channel dikonfirmasi pemilik situs: QRIS, transfer/VA, e-wallet, kartu kredit, retail (Alfamart).
+  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
   // domainesia.com/pembayaran: VA, e-wallet (GoPay/OVO/DANA/LinkAja/ShopeePay), QRIS, Kartu Kredit, PayPal, Indomaret/Alfamart.
   domainesia: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal', 'retail'] },
   // kb.cloudkilat.id: Virtual Account (8 bank), QRIS (OVO/GoPay/ShopeePay), Kartu Kredit.
