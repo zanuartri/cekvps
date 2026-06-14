@@ -75,7 +75,8 @@ function AppContent() {
   const [region, setRegion] = useState<Region | 'all'>('all')
   const [payment, setPayment] = useState<PaymentMethod | 'all'>('all')
 
-  const providers = [...new Set(vps.map(p => p.provider))]
+  const providers = [...new Set(vps.map(p => p.provider))].sort((a, b) =>
+    (PROVIDER_NAMES[a] || a).localeCompare(PROVIDER_NAMES[b] || b))
 
   return (
     <div className="min-h-screen bg-background">
