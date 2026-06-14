@@ -36,31 +36,38 @@ SPECS = {
     "XL":  {"vcpu": 32, "ram_gb": 32, "storage_gb": 320},
 }
 
-# Monthly offer in the JSON-LD: name "XXS (Bulanan)" ... price 90000
-_OFFER = re.compile(r'"name":"(XXS|XS|S|M|L|XL) \(Bulanan\)"[^}]*?"price":(\d+)')
+# JSON-LD carries two offers per tier: "<size> (Bulanan)" with the monthly price,
+# and "<size> (Tahunan)" with the *annual total*. We read both and derive the
+# annual effective /month as total / 12 (≈22% off, confirmed on the page toggle).
+# (The page also runs time-limited code promos like VPSJUNI2026 −30%, but those
+# are applied client-side and absent from the static HTML, so not scrapable.)
+_MONTHLY = re.compile(r'"name":"(XXS|XS|S|M|L|XL) \(Bulanan\)"[^}]*?"price":(\d+)')
+_ANNUAL = re.compile(r'"name":"(XXS|XS|S|M|L|XL) \(Tahunan\)"[^}]*?"price":(\d+)')
 
-ANNUAL_DISCOUNT = 0.22  # CloudKilat gives 22% off for annual (Tahunan) billing
+ANNUAL_DISCOUNT = 0.22  # fallback estimate if the (Tahunan) offer is missing
 
 
 def _annual_monthly(monthly: int) -> int:
-    """Effective /month price on the annual term."""
+    """Estimated annual /month — only used when the real annual offer is absent."""
     return round(monthly * (1 - ANNUAL_DISCOUNT))
 
 
 def scrape() -> list[dict]:
-    """Scrape CloudKilat Kilat VPS monthly prices from the page's JSON-LD."""
+    """Scrape CloudKilat Kilat VPS monthly + annual prices from the page's JSON-LD."""
     try:
         html = fetch(BASE_URL)
-        prices = {}
-        for name, price in _OFFER.findall(html):
-            prices.setdefault(name, int(price))  # first (monthly) offer wins
+        monthly, annual = {}, {}
+        for name, price in _MONTHLY.findall(html):
+            monthly.setdefault(name, int(price))
+        for name, total in _ANNUAL.findall(html):
+            annual.setdefault(name, int(total))  # annual TOTAL (per year)
 
         ts = now_iso()
         results = []
         for name, spec in SPECS.items():
-            if name not in prices:
+            if name not in monthly:
                 continue
-            results.append(_row(name, spec, prices[name], ts))
+            results.append(_row(name, spec, monthly[name], annual.get(name), ts))
 
         if results:
             logger.info(f"Scraped {len(results)} CloudKilat plans")
@@ -74,7 +81,7 @@ def scrape() -> list[dict]:
     return _fallback()
 
 
-def _row(name: str, spec: dict, price: int, ts: str) -> dict:
+def _row(name: str, spec: dict, price: int, annual_total: int | None, ts: str) -> dict:
     return {
         "provider": PROVIDER,
         "plan": f"Kilat VPS {name}",
@@ -87,7 +94,8 @@ def _row(name: str, spec: dict, price: int, ts: str) -> dict:
         "price_original": None,
         "discount_pct": None,
         "setup_fee": None,
-        "price_annual_monthly": _annual_monthly(price),
+        # real annual /month (total / 12) when available, else the 22% estimate
+        "price_annual_monthly": round(annual_total / 12) if annual_total else _annual_monthly(price),
         "currency": "IDR",
         "url": BASE_URL,
         "scraped_at": ts,
