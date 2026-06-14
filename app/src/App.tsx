@@ -197,7 +197,7 @@ function AppContent() {
                   return (
                     <Chip key={r} active={active} onClick={() => setRegion(active ? 'all' : r)}>
                       {r === 'local' ? (
-                        <span className="inline-flex items-center gap-1">
+                        <span className="inline-flex items-center gap-1.5">
                           <span className="inline-block w-3.5 h-2.5 rounded-xs overflow-hidden align-middle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]">
                             <svg viewBox="0 0 3 2" className="w-full h-full block"><rect fill="#e70011" width="3" height="1"/><rect fill="#fff" y="1" width="3" height="1"/></svg>
                           </span>
@@ -286,7 +286,7 @@ function AppContent() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">☕ Saweria</a></li>
                 {SITE.social.github && <li><a href={SITE.social.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">GitHub</a></li>}
-                {SITE.social.email && <li><a href={`mailto:${SITE.social.email}`} className="transition-colors hover:text-foreground">Email</a></li>}
+                {SITE.social.threads && <li><a href={SITE.social.threads} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">Threads</a></li>}
               </ul>
             </div>
           </div>

@@ -23,11 +23,20 @@ export interface VPSResponse {
 
 export type CurrencyCode = 'IDR' | 'USD' | 'EUR';
 
-export const FX: Record<CurrencyCode, { symbol: string; locale: string; decimals: number; toIDR: number }> = {
+export interface FxEntry { symbol: string; locale: string; decimals: number; toIDR: number }
+
+const FX_DEFAULTS: Record<CurrencyCode, FxEntry> = {
   IDR: { symbol: 'Rp', locale: 'id-ID', decimals: 0, toIDR: 1 },
   USD: { symbol: '$', locale: 'en-US', decimals: 2, toIDR: 16200 },
   EUR: { symbol: '€', locale: 'de-DE', decimals: 2, toIDR: 17600 },
 };
+
+export const FX: Record<CurrencyCode, FxEntry> = { ...FX_DEFAULTS };
+
+export function updateFX(usdToIdr: number, eurToIdr: number) {
+  FX.USD = { ...FX_DEFAULTS.USD, toIDR: usdToIdr };
+  FX.EUR = { ...FX_DEFAULTS.EUR, toIDR: eurToIdr };
+}
 
 export const PROVIDER_NAMES: Record<string, string> = {
   contabo: 'Contabo',

@@ -29,7 +29,7 @@ export default function Calculator({ vps }: CalculatorProps) {
     <div className="rounded-2xl border bg-card p-6 sm:p-8 shadow-sm">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <Control label="RAM minimum" value={`${ram} GB`}>
-          <Slider value={[ram]} onValueChange={([v]) => setRam(v)} min={0.5} max={64} step={0.5} />
+          <Slider value={[ram]} onValueChange={([v]) => setRam(v)} min={0} max={64} step={2} />
         </Control>
         <Control label="CPU minimum" value={`${cpu} core`}>
           <Slider value={[cpu]} onValueChange={([v]) => setCpu(v)} min={1} max={32} step={1} />

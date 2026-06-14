@@ -15,9 +15,8 @@ export const SITE = {
   // Voluntary donation (Saweria). Ganti dengan username kamu.
   saweriaUsername: 'cekvps',
   social: {
-    github: 'https://github.com/zanuartri/cekvps',
-    twitter: '',
-    email: 'halo@cekvps.com',
+    github: 'https://github.com/zanuartri',
+    threads: 'https://www.threads.com/@zanuar.tri',
   },
 } as const
 

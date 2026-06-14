@@ -1,7 +1,7 @@
 """
 CekVPS — Scraper Runner
 
-Orchestrates all VPS and domain scrapers, outputs to JSON.
+Orchestrates all VPS and domain scrapers, fetches FX rates, outputs to JSON.
 """
 import json
 import logging
@@ -80,6 +80,34 @@ def run_domain_scrapers() -> list[dict]:
     return all_data
 
 
+def run_fx_fetch():
+    """Fetch latest USD→IDR and EUR→IDR from frankfurter.app (free, no key).
+    Writes to data/live/fx.json. Returns True on success."""
+    try:
+        import requests as r
+        resp = r.get("https://api.frankfurter.app/latest?from=USD&to=IDR,EUR", timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+        usd_idr = data["rates"]["IDR"]
+        eur_idr = round(usd_idr / data["rates"]["EUR"], 0)
+        fx = {
+            "base": "IDR",
+            "date": data["date"],
+            "rates": {
+                "USD": usd_idr,
+                "EUR": eur_idr,
+            },
+            "fetched_at": now_iso(),
+        }
+        LIVE_DATA.mkdir(parents=True, exist_ok=True)
+        write_json(LIVE_DATA / "fx.json", fx)
+        logger.info(f"💱 FX rates: USD={usd_idr:,.0f}, EUR={eur_idr:,.0f} (date: {data['date']})")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to fetch FX rates: {e}")
+        return False
+
+
 def main():
     logger.info("=" * 50)
     logger.info("CekVPS Scraper — Starting run")
@@ -117,6 +145,9 @@ def main():
         logger.info(f"✅ Domains: {len(domain_data)} TLDs from {len(by_registrar)} registrars")
     else:
         logger.warning("⚠️ No domain data collected")
+
+    # --- FX Rates ---
+    run_fx_fetch()
 
     # --- Summary ---
     summary = {

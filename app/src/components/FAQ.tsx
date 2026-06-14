@@ -11,7 +11,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Apa itu link affiliate di sini?',
-    a: 'Sebagian tombol "Deploy" memakai link affiliate. Kalau kamu daftar lewat link itu, kami bisa ' +
+    a: 'Sebagian tombol "Lihat" memakai link affiliate. Kalau kamu daftar lewat link itu, kami bisa ' +
       'dapat komisi kecil tanpa biaya tambahan untukmu. Urutan & harga yang ditampilkan tidak terpengaruh.',
   },
   {
@@ -27,7 +27,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Provider saya belum ada. Bisa ditambah?',
-    a: 'Bisa! Kirim masukan lewat email atau GitHub dan kami usahakan tambahkan.',
+    a: 'Bisa! Kirim masukan lewat Threads atau GitHub dan kami usahakan tambahkan.',
   },
 ]
 
