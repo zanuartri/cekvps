@@ -92,9 +92,6 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
                     {meta.region === 'local' && (
                       <span className="shrink-0 rounded-full bg-sky-400/15 px-1.5 py-px text-[10px] font-semibold uppercase tracking-wide text-sky-300">Lokal</span>
                     )}
-                    {partner && (
-                      <span className="shrink-0 rounded-full bg-amber-400/15 px-1.5 py-px text-[10px] font-semibold uppercase tracking-wide text-amber-300">Partner</span>
-                    )}
                     {isCheapest && (
                       <span className="shrink-0 rounded-full bg-emerald-400/15 px-1.5 py-px text-[10px] font-semibold uppercase tracking-wide text-emerald-300">Termurah</span>
                     )}

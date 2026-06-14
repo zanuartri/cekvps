@@ -6,13 +6,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Apakah CekVPS berbayar?',
-    a: 'Tidak. CekVPS gratis dan tanpa iklan. Kamu bisa mendukung lewat donasi sukarela (Saweria) ' +
-      'atau dengan mendaftar provider lewat link affiliate kami.',
-  },
-  {
-    q: 'Apa itu link affiliate di sini?',
-    a: 'Sebagian tombol "Lihat" memakai link affiliate. Kalau kamu daftar lewat link itu, kami bisa ' +
-      'dapat komisi kecil tanpa biaya tambahan untukmu. Urutan & harga yang ditampilkan tidak terpengaruh.',
+    a: 'Tidak. CekVPS gratis dan tanpa iklan. Kamu bisa mendukung lewat donasi sukarela (Saweria).',
   },
   {
     q: 'Kenapa harganya beda dengan situs provider?',
@@ -27,7 +21,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Provider saya belum ada. Bisa ditambah?',
-    a: 'Bisa! Kirim masukan lewat Threads atau GitHub dan kami usahakan tambahkan.',
+    a: 'Bisa! Kirim masukan lewat Threads dan kami usahakan tambahkan.',
   },
 ]
 

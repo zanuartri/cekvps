@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select'
-import { SITE, SAWERIA_URL, AFFILIATE_DISCLOSURE } from '@/lib/site'
+import { SITE, SAWERIA_URL } from '@/lib/site'
 
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'price-asc', label: 'Termurah' },
@@ -294,14 +294,12 @@ function AppContent() {
               <p className="mb-3 text-sm font-semibold text-foreground">Terhubung</p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">☕ Saweria</a></li>
-                {SITE.social.github && <li><a href={SITE.social.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">GitHub</a></li>}
                 {SITE.social.threads && <li><a href={SITE.social.threads} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">Threads</a></li>}
               </ul>
             </div>
           </div>
 
           <div className="mt-10 space-y-3 border-t pt-6 text-xs text-muted-foreground">
-            <p className="leading-relaxed">{AFFILIATE_DISCLOSURE}</p>
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <p>© {new Date().getFullYear()} {SITE.name}. Harga bisa berubah, cek ulang di provider.</p>
               {lastRun && (
