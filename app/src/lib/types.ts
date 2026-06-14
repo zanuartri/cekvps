@@ -58,6 +58,8 @@ export const PROVIDER_NAMES: Record<string, string> = {
   biznet_gio: 'Biznet Gio',
   dalang: 'Dalang.io',
   sumopod: 'Sumopod',
+  domainesia: 'DomaiNesia',
+  cloudkilat: 'CloudKilat',
 };
 
 export const PROVIDER_COLORS: Record<string, string> = {
@@ -67,6 +69,8 @@ export const PROVIDER_COLORS: Record<string, string> = {
   biznet_gio: 'from-cyan-600 to-teal-700',
   dalang: 'from-violet-500 to-purple-700',
   sumopod: 'from-sky-400 to-blue-600',
+  domainesia: 'from-green-500 to-emerald-600',
+  cloudkilat: 'from-blue-500 to-indigo-600',
 };
 
 // --- Provider metadata: region & metode pembayaran ---
@@ -102,6 +106,8 @@ export const PROVIDER_META: Record<string, ProviderMeta> = {
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
   sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
+  domainesia: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
+  cloudkilat: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
 };
 
 export const DEFAULT_META: ProviderMeta = { region: 'global', payments: ['cc'] };

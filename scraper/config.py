@@ -31,6 +31,8 @@ VPS_PROVIDERS = {
     "biznet_gio": {"enabled": True, "priority": 6},
     "dalang": {"enabled": False, "priority": 9},       # TODO: real data (curated/scrape)
     "sumopod": {"enabled": True, "priority": 11},
+    "domainesia": {"enabled": False, "priority": 12},  # TODO: real data (curated/scrape)
+    "cloudkilat": {"enabled": False, "priority": 13},  # TODO: real data (curated/scrape)
 }
 
 # Domain registrars

@@ -40,8 +40,8 @@ export const AFFILIATES: Record<string, AffiliateConfig> = {
   // Provider dengan program affiliate. Isi `ref` dengan kode kamu lalu set enabled: true.
   contabo: { enabled: false, ref: 'YOUR_CONTABO_REF', param: 'aff' },
   hostinger: { enabled: false, ref: 'YOUR_HOSTINGER_REF', param: 'REFERRALCODE' },
-  // idcloudhost, biznet_gio, dalang, sumopod: belum/ tidak ada program affiliate
-  // publik — tampil dengan link langsung ke halaman provider (tanpa kode ref).
+  // idcloudhost, biznet_gio, dalang, sumopod, domainesia, cloudkilat: belum ada
+  // kode ref affiliate — tampil dengan link langsung ke halaman provider.
 }
 
 /** Apakah provider ini partner affiliate aktif. */
