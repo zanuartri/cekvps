@@ -75,7 +75,7 @@ export default function DeployCost({ vps }: DeployCostProps) {
           </div>
           <div className="mt-4 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-mono text-xs text-muted-foreground">
-              {selectedVPS.plan} · {selectedVPS.vcpu} vCPU · {selectedVPS.ram_gb} GB RAM · {selectedVPS.storage_gb} GB {selectedVPS.storage_type}
+              {selectedVPS.plan} · {selectedVPS.vcpu} vCPU · {selectedVPS.ram_gb} GB RAM · {fmtStorage(selectedVPS.storage_gb)} {selectedVPS.storage_type}
             </p>
             <a
               href={buildAffiliateUrl(selectedVPS.provider, selectedVPS.url)}

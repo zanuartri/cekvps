@@ -3,7 +3,7 @@ export interface VPSPlan {
   plan: string;
   vcpu: number;
   ram_gb: number;
-  storage_gb: number;
+  storage_gb: number | null;
   storage_type: string;
   bandwidth_tb: number | null;
   price_monthly: number;
@@ -134,7 +134,7 @@ export function fmtPrice(amount: number, currency: CurrencyCode): string {
   }
 }
 
-export function fmtStorage(gb: number): string {
+export function fmtStorage(gb: number | null): string {
   if (!gb) return '-';
   return gb >= 1000 ? `${(gb / 1000).toFixed(1)} TB` : `${gb} GB`;
 }

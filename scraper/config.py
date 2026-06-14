@@ -63,10 +63,15 @@ FALLBACK_VPS = {
         {"plan": "Cloud VPS 50",      "vcpu": 16, "ram_gb": 64,  "storage_gb": 300,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 29.60, "currency": "EUR", "url": "https://contabo.com/en/vps/"},
         {"plan": "Cloud VPS 60",      "vcpu": 18, "ram_gb": 96,  "storage_gb": 350,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 39.20, "currency": "EUR", "url": "https://contabo.com/en/vps/"},
     ],
+    # Biznet's budget line is "NEO Lite". Plan name = "<SIZE> <RAM_GB>.<vCPU>".
+    # All NEO Lite tiers ship 60 GB SSD. Source: www.biznetgio.com/pricelist
     "biznet_gio": [
-        {"plan": "GIO VPS 1",         "vcpu": 1,  "ram_gb": 1,   "storage_gb": 20,   "storage_type": "SSD",  "bandwidth_tb": 0.5,  "price": 59000,  "currency": "IDR", "url": "https://gio.id/vps"},
-        {"plan": "GIO VPS 2",         "vcpu": 2,  "ram_gb": 2,   "storage_gb": 40,   "storage_type": "SSD",  "bandwidth_tb": 1,    "price": 99000,  "currency": "IDR", "url": "https://gio.id/vps"},
-        {"plan": "GIO VPS 3",         "vcpu": 2,  "ram_gb": 4,   "storage_gb": 80,   "storage_type": "SSD",  "bandwidth_tb": 2,    "price": 179000, "currency": "IDR", "url": "https://gio.id/vps"},
+        {"plan": "NEO Lite XS 1.1",   "vcpu": 1,  "ram_gb": 1,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 59000,  "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
+        {"plan": "NEO Lite SS 2.1",   "vcpu": 1,  "ram_gb": 2,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 80000,  "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
+        {"plan": "NEO Lite SS 2.2",   "vcpu": 2,  "ram_gb": 2,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 109000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
+        {"plan": "NEO Lite MS 4.2",   "vcpu": 2,  "ram_gb": 4,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 139000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
+        {"plan": "NEO Lite MS 4.4",   "vcpu": 4,  "ram_gb": 4,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 179000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
+        {"plan": "NEO Lite MM 8.4",   "vcpu": 4,  "ram_gb": 8,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 269000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
     ],
 }
 
