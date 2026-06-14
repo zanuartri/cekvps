@@ -1,29 +1,24 @@
 import { useCurrency, type CurrencyCode } from '@/context/CurrencyContext'
-import { Button } from '@/components/ui/button'
 
-const CURRENCIES: { code: CurrencyCode; label: string }[] = [
-  { code: 'IDR', label: 'IDR' },
-  { code: 'USD', label: 'USD' },
-  { code: 'EUR', label: 'EUR' },
-]
+const CURRENCIES: CurrencyCode[] = ['IDR', 'USD', 'EUR']
 
 export default function CurrencyToggle() {
   const { currency, setCurrency } = useCurrency()
 
   return (
-    <div className="flex gap-1 rounded-lg bg-muted p-0.5">
+    <div className="flex rounded-lg border bg-card p-0.5">
       {CURRENCIES.map(c => (
-        <Button
-          key={c.code}
-          variant={currency === c.code ? 'default' : 'ghost'}
-          size="sm"
-          onClick={() => setCurrency(c.code)}
-          className={`px-3 h-8 text-xs font-semibold ${
-            currency === c.code ? '' : 'text-muted-foreground'
+        <button
+          key={c}
+          onClick={() => setCurrency(c)}
+          className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
+            currency === c
+              ? 'bg-primary text-primary-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
           }`}
         >
-          {c.label}
-        </Button>
+          {c}
+        </button>
       ))}
     </div>
   )

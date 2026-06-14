@@ -1,9 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, type ReactNode } from 'react'
 import type { VPSPlan } from '@/lib/types'
 import { useCurrency } from '@/context/CurrencyContext'
-import { convertPrice, fmtPrice, fmtStorage } from '@/lib/types'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { convertPrice, fmtPrice, fmtStorage, PROVIDER_NAMES, PROVIDER_COLORS } from '@/lib/types'
+import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
 import { Slider } from '@/components/ui/slider'
 
 interface CalculatorProps {
@@ -18,85 +17,84 @@ export default function Calculator({ vps }: CalculatorProps) {
   const matches = useMemo(() => {
     return vps
       .filter(p => p.ram_gb >= ram && p.vcpu >= cpu)
-      .sort((a, b) => {
-        const pa = convertPrice(a.price_monthly, a.currency as any, currency)
-        const pb = convertPrice(b.price_monthly, b.currency as any, currency)
-        return pa - pb
-      })
+      .sort((a, b) =>
+        convertPrice(a.price_monthly, a.currency as any, currency) -
+        convertPrice(b.price_monthly, b.currency as any, currency)
+      )
       .slice(0, 6)
   }, [vps, ram, cpu, currency])
 
   return (
-    <Card className="border shadow-sm">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-xl">
-          🧮 "Can I Run This?"
-        </CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Masukkan kebutuhan RAM & CPU, kami kasih rekomendasi VPS termurah yang bisa menjalankan app kamu.
-        </p>
-      </CardHeader>
-      <CardContent className="space-y-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium">RAM</label>
-              <span className="text-lg font-bold tabular-nums text-primary font-mono">{ram} GB</span>
-            </div>
-            <Slider
-              value={[ram]}
-              onValueChange={([v]) => setRam(v)}
-              min={0.5}
-              max={64}
-              step={0.5}
-            />
-          </div>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium">CPU Cores</label>
-              <span className="text-lg font-bold tabular-nums text-primary font-mono">{cpu} Core</span>
-            </div>
-            <Slider
-              value={[cpu]}
-              onValueChange={([v]) => setCpu(v)}
-              min={1}
-              max={32}
-              step={1}
-            />
-          </div>
-        </div>
+    <div className="rounded-2xl border bg-card p-6 sm:p-8 shadow-sm">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <Control label="RAM minimum" value={`${ram} GB`}>
+          <Slider value={[ram]} onValueChange={([v]) => setRam(v)} min={0.5} max={64} step={0.5} />
+        </Control>
+        <Control label="CPU minimum" value={`${cpu} core`}>
+          <Slider value={[cpu]} onValueChange={([v]) => setCpu(v)} min={1} max={32} step={1} />
+        </Control>
+      </div>
 
+      <div className="mt-8 border-t pt-6">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          {matches.length > 0 ? 'Rekomendasi termurah' : 'Hasil'}
+        </p>
         {matches.length > 0 ? (
-          <div className="space-y-3">
-            <h3 className="font-semibold text-sm text-muted-foreground">🏆 Rekomendasi Termurah</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {matches.map(p => (
-                <Card key={`${p.provider}-${p.plan}`} className="bg-card/50 border">
-                  <CardContent className="p-4 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-sm capitalize">{p.provider.replace('_', ' ')}</span>
-                      <span className="font-bold text-primary">
-                        {fmtPrice(convertPrice(p.price_monthly, p.currency as any, currency), currency)}
-                        <span className="text-xs text-muted-foreground font-normal">/bln</span>
-                      </span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">{p.plan}</p>
-                    <div className="flex flex-wrap gap-1">
-                      <Badge variant="secondary" className="text-xs">🧠 {p.vcpu} vCPU</Badge>
-                      <Badge variant="secondary" className="text-xs">💾 {fmtStorage(p.ram_gb)}</Badge>
-                      <Badge variant="secondary" className="text-xs">📀 {fmtStorage(p.storage_gb)}</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {matches.map((p, i) => {
+              const price = convertPrice(p.price_monthly, p.currency as any, currency)
+              const name = PROVIDER_NAMES[p.provider] || p.provider
+              const gradient = PROVIDER_COLORS[p.provider] || 'from-slate-500 to-slate-700'
+              const outUrl = buildAffiliateUrl(p.provider, p.url)
+              return (
+                <a
+                  key={`${p.provider}-${p.plan}`}
+                  href={outUrl}
+                  target="_blank"
+                  rel={isAffiliate(p.provider) ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
+                  className="group relative flex flex-col gap-2 rounded-xl border bg-background p-4 transition-all hover:border-primary/40 hover:shadow-md"
+                >
+                  {i === 0 && (
+                    <span className="absolute -top-2 left-3 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-foreground shadow-sm">
+                      Termurah
+                    </span>
+                  )}
+                  <div className="flex items-center gap-2">
+                    <span className={`flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br ${gradient} text-xs font-bold text-white`}>
+                      {name.charAt(0)}
+                    </span>
+                    <span className="truncate text-sm font-semibold">{name}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{p.plan}</p>
+                  <div className="flex flex-wrap gap-1 font-mono text-[11px] text-muted-foreground">
+                    <span>{p.vcpu} vCPU</span>·<span>{fmtStorage(p.ram_gb)}</span>·<span>{fmtStorage(p.storage_gb)}</span>
+                  </div>
+                  <div className="mt-1 flex items-center justify-between">
+                    <span className="font-mono text-base font-bold tabular-nums">{fmtPrice(price, currency)}<span className="text-xs font-normal text-muted-foreground">/bln</span></span>
+                    <span className="text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">Deploy ↗</span>
+                  </div>
+                </a>
+              )
+            })}
           </div>
         ) : (
-          <div className="text-center py-8 text-muted-foreground">
-            Tidak ada VPS yang memenuhi spesifikasi tersebut.
+          <div className="rounded-xl border border-dashed py-10 text-center text-sm text-muted-foreground">
+            Tidak ada VPS yang memenuhi spesifikasi itu. Coba turunkan RAM/CPU.
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
+  )
+}
+
+function Control({ label, value, children }: { label: string; value: string; children: ReactNode }) {
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <label className="text-sm font-medium text-foreground">{label}</label>
+        <span className="font-mono text-base font-bold tabular-nums text-primary">{value}</span>
+      </div>
+      {children}
+    </div>
   )
 }
