@@ -24,3 +24,7 @@ data/
 # ...but keep the seed/sample data so the frontend runs out of the box
 !app/public/data/
 !app/public/data/**
+
+# Tooling artifacts
+.commandcode/
+.gitcommit.txt
