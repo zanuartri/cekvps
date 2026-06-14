@@ -8,8 +8,13 @@ Accept-Encoding header; see utils.fetch.) The table is a Svelte CSS grid where
 cells are flat siblings in document order, so we split the table text on the
 "Cloud VPS N" model boundaries and read each plan's fields by regex.
 
-Prices are the advertised 12-month-term rate (EUR), matching what the page shows.
-Falls back to hardcoded data on failure.
+The price in the table is the advertised 12-month-term rate (EUR) — a flat 20%
+discount vs paying monthly (verified June 2026: €4.40 = €5.50×0.8, €6.00 =
+€7.50×0.8, €11.20 = €14.00×0.8). Every other provider in the catalog is quoted
+at a no-commitment monthly rate, so for an apples-to-apples comparison we surface
+Contabo's true monthly rate (annual / 0.8) as `price_monthly` and keep the
+discounted 12-month rate in `price_annual_monthly`. Falls back to hardcoded data
+on failure.
 """
 import re
 import logging
@@ -21,6 +26,14 @@ from utils import fetch, now_iso
 logger = logging.getLogger("cekvps.contabo")
 PROVIDER = "contabo"
 BASE_URL = "https://contabo.com/en/pricing/"
+
+# Flat discount Contabo gives for the 12-month term vs monthly billing.
+ANNUAL_DISCOUNT = 0.20
+
+
+def _monthly_from_annual(annual: float) -> float:
+    """Recover the no-commitment monthly rate from the 12-month effective rate."""
+    return round(annual / (1 - ANNUAL_DISCOUNT), 2)
 
 
 def scrape() -> list[dict]:
@@ -77,11 +90,11 @@ def _parse_plan(model: str, body: str, ts: str) -> dict | None:
         "storage_gb": int(nvme.group(1)) if nvme else None,
         "storage_type": "NVMe",
         "bandwidth_tb": bandwidth,
-        "price_monthly": float(price.group(1).replace(",", ".")),
+        "price_monthly": _monthly_from_annual(float(price.group(1).replace(",", "."))),
         "price_original": None,        # canonical table shows no promo strike
         "discount_pct": None,
         "setup_fee": 0.0 if "No Setup Fee" in body else None,
-        "price_annual_monthly": None,
+        "price_annual_monthly": float(price.group(1).replace(",", ".")),
         "currency": "EUR",
         "url": BASE_URL,
         "scraped_at": ts,
@@ -101,11 +114,11 @@ def _fallback() -> list[dict]:
             "storage_gb": p["storage_gb"],
             "storage_type": p["storage_type"],
             "bandwidth_tb": p["bandwidth_tb"],
-            "price_monthly": p["price"],
+            "price_monthly": _monthly_from_annual(p["price"]),
             "price_original": None,
             "discount_pct": None,
             "setup_fee": None,
-            "price_annual_monthly": None,
+            "price_annual_monthly": p["price"],
             "currency": p["currency"],
             "url": p["url"],
             "scraped_at": ts,

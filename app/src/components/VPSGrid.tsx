@@ -130,6 +130,11 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
                     <span className="font-mono text-base font-bold tabular-nums">{fmtPrice(price, currency)}</span>
                     <span className="text-xs text-muted-foreground">/bln</span>
                   </div>
+                  {p.price_annual_monthly && p.price_annual_monthly < p.price_monthly ? (
+                    <div className="text-[10px] text-muted-foreground">
+                      {fmtPrice(convertPrice(p.price_annual_monthly, p.currency as any, currency), currency)}/bln jika tahunan
+                    </div>
+                  ) : null}
                 </div>
                 {outUrl && (
                   <a

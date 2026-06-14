@@ -53,6 +53,9 @@ CURRENCIES = {
 # Fallback prices (used when scrape fails — hardcoded last-known prices)
 # These keep the site up even if a provider changes their page
 FALLBACK_VPS = {
+    # Contabo: `price` here is the advertised 12-month rate (EUR). The provider
+    # derives the no-commitment monthly headline as price / 0.8 (flat 20% term
+    # discount) and keeps this value as price_annual_monthly. See providers/contabo.py.
     "contabo": [
         {"plan": "Cloud VPS 10",      "vcpu": 4,  "ram_gb": 8,   "storage_gb": 75,   "storage_type": "NVMe", "bandwidth_tb": None, "price": 4.40,  "currency": "EUR", "url": "https://contabo.com/en/vps/"},
         {"plan": "Cloud VPS 20",      "vcpu": 6,  "ram_gb": 12,  "storage_gb": 100,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 6.00,  "currency": "EUR", "url": "https://contabo.com/en/vps/"},
