@@ -10,6 +10,14 @@ export interface VPSPlan {
   currency: string;
   url: string;
   scraped_at: string;
+  // Optional pricing detail — populated by scrapers only when found on the
+  // provider page, otherwise null. price_original/discount_pct = promo on the
+  // monthly price; setup_fee = one-off install cost (0 = explicitly free);
+  // price_annual_monthly = effective per-month price when paying annually.
+  price_original?: number | null;
+  discount_pct?: number | null;
+  setup_fee?: number | null;
+  price_annual_monthly?: number | null;
 }
 
 export interface VPSResponse {

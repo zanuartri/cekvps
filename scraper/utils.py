@@ -38,7 +38,9 @@ def get_session() -> requests.Session:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             "Accept-Language": "en-US,en;q=0.9,id;q=0.8",
-            "Accept-Encoding": "gzip, deflate, br",
+            # No "br": brotli isn't a hard dependency, and advertising it makes
+            # servers return undecodable brotli bodies (garbled/short HTML).
+            "Accept-Encoding": "gzip, deflate",
             "DNT": "1",
             "Connection": "keep-alive",
             "Upgrade-Insecure-Requests": "1",
@@ -56,6 +58,11 @@ def fetch(url: str, parser: str = "html.parser") -> str:
     logger.info(f"Fetching: {url}")
     resp = sess.get(url, timeout=TIMEOUT)
     resp.raise_for_status()
+    # When the server omits a charset, requests defaults to latin-1 for
+    # text/* and mangles UTF-8 bytes (e.g. "€" -> "â¬"). Detect the real
+    # encoding from the body so currency symbols survive.
+    if "charset" not in resp.headers.get("Content-Type", "").lower():
+        resp.encoding = resp.apparent_encoding or "utf-8"
     # be polite
     time.sleep(0.5)
     return resp.text
