@@ -74,8 +74,10 @@ export const PROVIDER_COLORS: Record<string, string> = {
 };
 
 // --- Provider metadata: region & metode pembayaran ---
-// Catatan: metode pembayaran bersifat indikatif. Yang lokal (Indonesia) terima QRIS;
-// yang global umumnya kartu kredit/PayPal. Selalu cek final di halaman provider.
+// Metode pembayaran diverifikasi dari halaman/KB resmi tiap provider (Juni 2026).
+// Pengecualian: Sumopod & Dalang belum bisa dikonfirmasi dari sumber publik
+// (checkout di balik login/SPA), jadi nilainya konservatif — cek lagi nanti.
+// Tetap saran ke user: konfirmasi final di halaman checkout provider.
 export type Region = 'local' | 'global';
 export type PaymentMethod = 'qris' | 'transfer' | 'ewallet' | 'cc' | 'retail' | 'paypal' | 'crypto';
 
@@ -100,13 +102,21 @@ export interface ProviderMeta {
 }
 
 export const PROVIDER_META: Record<string, ProviderMeta> = {
-  contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer', 'crypto'] },
-  hostinger: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
-  idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
+  // help.contabo.com: Credit Card, PayPal, Bank Transfer (+ Skrill, Direct Debit). Crypto TIDAK diterima.
+  contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer'] },
+  // hostinger.com/support: Credit Card + PayPal; ID menambah QRIS, e-wallet (OVO), transfer bank.
+  hostinger: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal'] },
+  // idcloudhost.com/panduan: Transfer/VA, e-wallet, QRIS, Kartu Kredit, PayPal, Alfamart/Indomaret/Lawson.
+  idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal', 'retail'] },
+  // kb.biznetgio.com (NEO Cloud): Kartu Kredit (Visa/MC/JCB), Transfer Bank/VA, e-Wallet, QRIS.
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
+  // BELUM terkonfirmasi (checkout di balik CRM/login) — nilai konservatif.
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
-  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'retail'] },
-  domainesia: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
+  // BELUM terkonfirmasi (model topup, dashboard auth-gated) — nilai konservatif.
+  sumopod: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
+  // domainesia.com/pembayaran: VA, e-wallet (GoPay/OVO/DANA/LinkAja/ShopeePay), QRIS, Kartu Kredit, PayPal, Indomaret/Alfamart.
+  domainesia: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc', 'paypal', 'retail'] },
+  // kb.cloudkilat.id: Virtual Account (8 bank), QRIS (OVO/GoPay/ShopeePay), Kartu Kredit.
   cloudkilat: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
 };
 
