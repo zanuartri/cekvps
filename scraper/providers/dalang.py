@@ -6,7 +6,8 @@ internet speed, and the price is computed client-side — there are no fixed pla
 to scrape. The monthly (pre-tax) price is a clean linear formula, verified
 against the builder:
 
-    subtotal = 20_000 + 20_000 * vCPU + 5_000 * RAM_GB   (at 20 GB NVMe, free 20 Mbps)
+    subtotal = 20_000 + 20_000*vCPU + 5_000*RAM_GB
+             + 1_000*(storage_gb - 20) + 20_000*(speed_mbps - 20)/20   (20 GB & 20 Mbps free)
     price    = subtotal * 1.11   (PPN 11%, the "TOTAL" the builder shows)
 
 We store the tax-inclusive TOTAL to match Dalang's prominent headline price
@@ -25,15 +26,25 @@ from utils import now_iso
 logger = logging.getLogger("cekvps.dalang")
 PROVIDER = "dalang"
 
-# Per-unit monthly pricing (IDR, pre-tax), at the 20 GB / 20 Mbps base.
+# Per-unit monthly pricing (IDR, pre-tax). 20 GB storage and 20 Mbps are free.
 BASE = 20_000
 PER_VCPU = 20_000
 PER_RAM_GB = 5_000
+PER_GB_STORAGE = 1_000          # above the free 20 GB
+PER_SPEED_STEP = 20_000         # per +20 Mbps above the free 20 Mbps
+FREE_STORAGE_GB = 20
+FREE_SPEED_MBPS = 20
 TAX = 0.11  # PPN — Dalang's headline price is the tax-inclusive TOTAL
 
 
-def monthly_price(vcpu: int, ram_gb: int) -> int:
-    subtotal = BASE + PER_VCPU * vcpu + PER_RAM_GB * ram_gb
+def monthly_price(vcpu: int, ram_gb: int, storage_gb: int, speed_mbps: int) -> int:
+    subtotal = (
+        BASE
+        + PER_VCPU * vcpu
+        + PER_RAM_GB * ram_gb
+        + PER_GB_STORAGE * max(0, storage_gb - FREE_STORAGE_GB)
+        + PER_SPEED_STEP * max(0, (speed_mbps - FREE_SPEED_MBPS) // 20)
+    )
     return round(subtotal * (1 + TAX))
 
 
@@ -42,7 +53,7 @@ def scrape() -> list[dict]:
     ts = now_iso()
     results = []
     for p in FALLBACK_VPS[PROVIDER]:
-        price = monthly_price(p["vcpu"], p["ram_gb"])
+        price = monthly_price(p["vcpu"], p["ram_gb"], p["storage_gb"], p["speed_mbps"])
         if price != p["price"]:
             logger.warning(
                 f"Dalang {p['plan']}: formula {price} != curated {p['price']} "

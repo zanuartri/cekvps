@@ -129,17 +129,19 @@ FALLBACK_VPS = {
     # Dalang.io is an à-la-carte VPS *builder* (pick cores × RAM × storage ×
     # speed), not fixed plans, and the price is computed client-side — nothing to
     # scrape. The monthly TOTAL (tax-inclusive, the builder's headline price) is
-    #     (20000 + 20000*vCPU + 5000*RAM_GB) * 1.11   (PPN 11%, at 20 GB NVMe / free 20 Mbps)
-    # verified against the builder. We curate a handful of sensible presets that
-    # mirror Dalang's own usage hints, all at 20 GB (the storage tier we can price
-    # exactly). Bandwidth is a speed cap (20 Mbps), not a transfer quota, so
+    #   (20000 + 20000*vCPU + 5000*RAM_GB + 1000*(storage_gb-20)
+    #          + 20000*(speed_mbps-20)/20) * 1.11      (PPN 11%; 20 GB & 20 Mbps free)
+    # verified against the builder for all five presets. We curate sensible
+    # presets mirroring Dalang's usage hints, scaling storage/speed by tier; the
+    # small (1-core) tiers stay at Dalang's default 20 GB / 20 Mbps. Internet is a
+    # speed cap (Mbps), not a transfer quota, so it lives in the plan name and
     # bandwidth_tb = None (unmetered transfer). Source: https://dalang.io/products/vps
     "dalang": [
-        {"plan": "Blog (1C/1GB)",         "vcpu": 1, "ram_gb": 1,  "storage_gb": 20, "storage_type": "NVMe", "bandwidth_tb": None, "price": 49950,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "WordPress (1C/2GB)",    "vcpu": 1, "ram_gb": 2,  "storage_gb": 20, "storage_type": "NVMe", "bandwidth_tb": None, "price": 55500,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "Standard (2C/4GB)",     "vcpu": 2, "ram_gb": 4,  "storage_gb": 20, "storage_type": "NVMe", "bandwidth_tb": None, "price": 88800,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "Business (4C/8GB)",     "vcpu": 4, "ram_gb": 8,  "storage_gb": 20, "storage_type": "NVMe", "bandwidth_tb": None, "price": 155400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "Performance (8C/16GB)", "vcpu": 8, "ram_gb": 16, "storage_gb": 20, "storage_type": "NVMe", "bandwidth_tb": None, "price": 288600, "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Blog (20 Mbps)",         "vcpu": 1, "ram_gb": 1,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 49950,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "WordPress (20 Mbps)",    "vcpu": 1, "ram_gb": 2,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 55500,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Standard (40 Mbps)",     "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "speed_mbps": 40,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 155400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Business (60 Mbps)",     "vcpu": 4, "ram_gb": 8,  "storage_gb": 80,  "speed_mbps": 60,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 266400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Performance (100 Mbps)", "vcpu": 8, "ram_gb": 16, "storage_gb": 100, "speed_mbps": 100, "storage_type": "NVMe", "bandwidth_tb": None, "price": 466200, "currency": "IDR", "url": "https://dalang.io/products/vps"},
     ],
     "sumopod": [
         {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
