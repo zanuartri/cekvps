@@ -29,7 +29,7 @@ VPS_PROVIDERS = {
     "hetzner": {"enabled": False, "priority": 2},
     "digitalocean": {"enabled": False, "priority": 3},
     "hostinger": {"enabled": False, "priority": 4},
-    "idcloudhost": {"enabled": False, "priority": 5},
+    "idcloudhost": {"enabled": True, "priority": 5},
     "biznet_gio": {"enabled": True, "priority": 6},
     "alibaba": {"enabled": False, "priority": 7},
     "tencent": {"enabled": False, "priority": 8},
@@ -72,6 +72,14 @@ FALLBACK_VPS = {
         {"plan": "NEO Lite MS 4.2",   "vcpu": 2,  "ram_gb": 4,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 139000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
         {"plan": "NEO Lite MS 4.4",   "vcpu": 4,  "ram_gb": 4,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 179000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
         {"plan": "NEO Lite MM 8.4",   "vcpu": 4,  "ram_gb": 8,   "storage_gb": 60, "storage_type": "SSD",  "bandwidth_tb": None, "price": 269000, "currency": "IDR", "url": "https://www.biznetgio.com/pricelist"},
+    ],
+    # IDCloudHost sits behind a Cloudflare challenge (plain HTTP -> 403), so its
+    # data is curated, not scraped. Prices are "simulasi"/indicative per their
+    # page. Source: https://idcloudhost.com/pricing/ (Basic Standard tiers).
+    "idcloudhost": [
+        {"plan": "Basic Standard 2GB/20GB", "vcpu": 2, "ram_gb": 2, "storage_gb": 20, "storage_type": "SSD", "bandwidth_tb": None, "price": 87000,  "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
+        {"plan": "Basic Standard 2GB/40GB", "vcpu": 2, "ram_gb": 2, "storage_gb": 40, "storage_type": "SSD", "bandwidth_tb": None, "price": 100000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
+        {"plan": "Basic Standard 4GB/60GB", "vcpu": 2, "ram_gb": 4, "storage_gb": 60, "storage_type": "SSD", "bandwidth_tb": None, "price": 225000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
     ],
 }
 
