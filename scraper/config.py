@@ -26,7 +26,7 @@ RETRY_DELAY = 2
 # yang masih False memakai seed/fallback price sampai scraper-nya dibuat.
 VPS_PROVIDERS = {
     "contabo": {"enabled": True, "priority": 1},
-    "hostinger": {"enabled": False, "priority": 4},   # TODO: real data (curated/scrape)
+    "hostinger": {"enabled": True, "priority": 4},
     "idcloudhost": {"enabled": True, "priority": 5},
     "biznet_gio": {"enabled": True, "priority": 6},
     "dalang": {"enabled": False, "priority": 9},       # TODO: real data (curated/scrape)
@@ -86,6 +86,20 @@ FALLBACK_VPS = {
     # Sumopod's official Threads (@sumopodcloud, "Syukuran Diskon 40% Untuk
     # Semua VPS Tencent"), so `price` is the real ongoing price, not a teaser.
     # Do NOT "correct" it up to price_orig. bandwidth_tb = monthly egress.
+    # Hostinger's KVM VPS line. The /id/harga/vps-hosting page is server-rendered
+    # but the price reflects whatever subscription term is *default-selected* (it
+    # flips between the 24- and 48-month promo on different loads), and the
+    # 1-month-term price shown in the cards is computed client-side — so it is not
+    # in the static HTML and can't be scraped reliably. We curate the 1-month-term
+    # numbers: `price` is the promo /bln, `price_orig` is the renewal (non-promo)
+    # /bln, so we surface the advertised discount. All tiers ship NVMe + the listed
+    # bandwidth as TB. Update when Hostinger changes the 1-month pricing.
+    "hostinger": [
+        {"plan": "KVM 1", "vcpu": 1, "ram_gb": 4,  "storage_gb": 50,  "storage_type": "NVMe", "bandwidth_tb": 4,  "price": 193900, "price_orig": 320900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 2", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "NVMe", "bandwidth_tb": 8,  "price": 252900, "price_orig": 407900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 4", "vcpu": 4, "ram_gb": 16, "storage_gb": 200, "storage_type": "NVMe", "bandwidth_tb": 16, "price": 485900, "price_orig": 679900,  "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+        {"plan": "KVM 8", "vcpu": 8, "ram_gb": 32, "storage_gb": 400, "storage_type": "NVMe", "bandwidth_tb": 32, "price": 970900, "price_orig": 1203900, "currency": "IDR", "url": "https://www.hostinger.com/id/harga/vps-hosting"},
+    ],
     "sumopod": [
         {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
         {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "price": 45000,  "price_orig": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},

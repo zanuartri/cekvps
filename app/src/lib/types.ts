@@ -101,7 +101,7 @@ export interface ProviderMeta {
 
 export const PROVIDER_META: Record<string, ProviderMeta> = {
   contabo: { region: 'global', payments: ['cc', 'paypal', 'transfer', 'crypto'] },
-  hostinger: { region: 'global', payments: ['cc', 'paypal', 'crypto'] },
+  hostinger: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
   idcloudhost: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
   biznet_gio: { region: 'local', payments: ['qris', 'transfer', 'ewallet', 'cc'] },
   dalang: { region: 'local', payments: ['qris', 'transfer', 'ewallet'] },
