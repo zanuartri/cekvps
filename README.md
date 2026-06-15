@@ -75,4 +75,10 @@ data provider** (`scraper/`) atau perbaikan UI. Untuk menambah provider: buat mo
 di `scraper/providers/`, daftarkan di `scraper/config.py`, lalu tambahkan metadata
 di `app/src/lib/types.ts` (`PROVIDER_NAMES`, `PROVIDER_COLORS`, `PROVIDER_META`).
 
+## Lisensi
+
+[MIT](./LICENSE) © zanuartri
+
+---
+
 > Harga bisa berubah sewaktu-waktu — selalu cek harga final di halaman provider.
