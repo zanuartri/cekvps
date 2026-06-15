@@ -63,7 +63,7 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
   return (
     <div className="rounded-2xl border bg-card shadow-sm">
       {/* header (desktop) */}
-      <div className="hidden grid-cols-[1.4fr_1.6fr_auto] items-center gap-4 border-b bg-secondary/40 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground sm:grid">
+      <div className="hidden grid-cols-[1.4fr_1.6fr_15rem] items-center gap-4 border-b bg-secondary/40 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground sm:grid">
         <span>Provider / plan</span>
         <span>Spesifikasi</span>
         <span className="text-right">Harga / bln</span>
@@ -81,7 +81,7 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
           return (
             <div
               key={`${p.provider}-${p.plan}`}
-              className="grid grid-cols-1 gap-3 px-4 py-3.5 transition-colors hover:bg-accent/40 sm:grid-cols-[1.4fr_1.6fr_auto] sm:items-center sm:gap-4 sm:px-5"
+              className="grid grid-cols-1 gap-3 px-4 py-3.5 transition-colors hover:bg-accent/40 sm:grid-cols-[1.4fr_1.6fr_15rem] sm:items-center sm:gap-4 sm:px-5"
             >
               {/* provider / plan */}
               <div className="flex items-center gap-3">
@@ -100,8 +100,8 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
                 </div>
               </div>
 
-              {/* specs — the three things users actually compare */}
-              <div className="flex gap-7 sm:gap-10">
+              {/* specs — fixed-width columns so vCPU/RAM/Storage line up across rows */}
+              <div className="grid grid-cols-[3rem_4.5rem_1fr] items-center gap-x-4 sm:grid-cols-[3.5rem_5rem_1fr] sm:gap-x-6">
                 <Stat label="vCPU" value={String(p.vcpu)} />
                 <Stat label="RAM" value={fmtStorage(p.ram_gb)} />
                 <Stat label="Storage" value={`${fmtStorage(p.storage_gb)} ${p.storage_type}`} />
@@ -151,7 +151,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0">
       <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
-      <div className="mt-0.5 text-sm font-semibold tabular-nums">{value}</div>
+      <div className="mt-0.5 whitespace-nowrap text-sm font-semibold tabular-nums">{value}</div>
     </div>
   )
 }

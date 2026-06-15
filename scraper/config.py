@@ -149,8 +149,8 @@ FALLBACK_VPS = {
     # speed cap (Mbps), not a transfer quota, so it lives in the plan name and
     # bandwidth_tb = None (unmetered transfer). Source: https://dalang.io/products/vps
     "dalang": [
-        {"plan": "Blog",        "vcpu": 1, "ram_gb": 1,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 49950,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "WordPress",   "vcpu": 1, "ram_gb": 2,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 55500,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Basic",       "vcpu": 1, "ram_gb": 1,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 49950,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Small Apps",  "vcpu": 1, "ram_gb": 2,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 55500,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
         {"plan": "Standard",    "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "speed_mbps": 40,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 155400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
         {"plan": "Business",    "vcpu": 4, "ram_gb": 8,  "storage_gb": 80,  "speed_mbps": 60,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 266400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
         {"plan": "Performance", "vcpu": 8, "ram_gb": 16, "storage_gb": 100, "speed_mbps": 100, "storage_type": "NVMe", "bandwidth_tb": None, "price": 466200, "currency": "IDR", "url": "https://dalang.io/products/vps"},
