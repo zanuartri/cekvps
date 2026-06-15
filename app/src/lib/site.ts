@@ -1,9 +1,8 @@
 /**
  * Central site & monetization config.
  *
- * ⚠️ Ganti placeholder di bawah dengan akun kamu yang asli:
- *   - SAWERIA_USERNAME → username Saweria kamu
- *   - AFFILIATES[provider].ref → kode/ID affiliate dari masing-masing provider
+ * Saweria sudah diset. AFFILIATES[provider].ref masih placeholder & affiliate
+ * di-disable untuk MVP — isi ref + set enabled:true kalau program-nya sudah ada.
  *
  * Semua monetisasi bersifat sukarela & transparan (lihat AFFILIATE_DISCLOSURE).
  */
@@ -12,8 +11,8 @@ export const SITE = {
   name: 'CekVPS',
   tagline: 'Cek & bandingkan harga VPS untuk developer Indonesia',
   url: 'https://cekvps.com',
-  // Voluntary donation (Saweria). Ganti dengan username kamu.
-  saweriaUsername: 'cekvps',
+  // Voluntary donation (Saweria).
+  saweriaUsername: 'zanuartri',
   social: {
     github: 'https://github.com/zanuartri',
     threads: 'https://www.threads.com/@zanuar.tri',
