@@ -295,6 +295,7 @@ function AppContent() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">☕ Saweria</a></li>
                 {SITE.social.threads && <li><a href={SITE.social.threads} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">Threads</a></li>}
+                {SITE.social.github && <li><a href={SITE.social.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">GitHub (open source)</a></li>}
               </ul>
             </div>
           </div>

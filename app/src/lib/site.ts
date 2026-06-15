@@ -14,7 +14,7 @@ export const SITE = {
   // Voluntary donation (Saweria).
   saweriaUsername: 'zanuartri',
   social: {
-    github: 'https://github.com/zanuartri',
+    github: 'https://github.com/zanuartri/cekvps',
     threads: 'https://www.threads.com/@zanuar.tri',
   },
 } as const
