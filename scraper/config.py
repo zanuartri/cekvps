@@ -149,19 +149,19 @@ FALLBACK_VPS = {
     # speed cap (Mbps), not a transfer quota, so it lives in the plan name and
     # bandwidth_tb = None (unmetered transfer). Source: https://dalang.io/products/vps
     "dalang": [
-        {"plan": "Blog (20 Mbps)",         "vcpu": 1, "ram_gb": 1,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 49950,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "WordPress (20 Mbps)",    "vcpu": 1, "ram_gb": 2,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 55500,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "Standard (40 Mbps)",     "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "speed_mbps": 40,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 155400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "Business (60 Mbps)",     "vcpu": 4, "ram_gb": 8,  "storage_gb": 80,  "speed_mbps": 60,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 266400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
-        {"plan": "Performance (100 Mbps)", "vcpu": 8, "ram_gb": 16, "storage_gb": 100, "speed_mbps": 100, "storage_type": "NVMe", "bandwidth_tb": None, "price": 466200, "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Blog",        "vcpu": 1, "ram_gb": 1,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 49950,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "WordPress",   "vcpu": 1, "ram_gb": 2,  "storage_gb": 20,  "speed_mbps": 20,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 55500,  "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Standard",    "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "speed_mbps": 40,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 155400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Business",    "vcpu": 4, "ram_gb": 8,  "storage_gb": 80,  "speed_mbps": 60,  "storage_type": "NVMe", "bandwidth_tb": None, "price": 266400, "currency": "IDR", "url": "https://dalang.io/products/vps"},
+        {"plan": "Performance", "vcpu": 8, "ram_gb": 16, "storage_gb": 100, "speed_mbps": 100, "storage_type": "NVMe", "bandwidth_tb": None, "price": 466200, "currency": "IDR", "url": "https://dalang.io/products/vps"},
     ],
     "sumopod": [
-        {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "price": 45000,  "price_orig": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 4GB/60GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "storage_type": "SSD", "bandwidth_tb": 1.54, "price": 54000,  "price_orig": 90000,  "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 4GB/70GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 70,  "storage_type": "SSD", "bandwidth_tb": 2.05, "price": 75000,  "price_orig": 125000, "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 8GB/80GB",  "vcpu": 2, "ram_gb": 8,  "storage_gb": 80,  "storage_type": "SSD", "bandwidth_tb": 2.56, "price": 90000,  "price_orig": 150000, "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 8GB/100GB", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "SSD", "bandwidth_tb": 3.07, "price": 111000, "price_orig": 185000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "speed_mbps": 20, "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "speed_mbps": 30, "price": 45000,  "price_orig": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 4GB/60GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "storage_type": "SSD", "bandwidth_tb": 1.54, "speed_mbps": 30, "price": 54000,  "price_orig": 90000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 4GB/70GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 70,  "storage_type": "SSD", "bandwidth_tb": 2.05, "speed_mbps": 30, "price": 75000,  "price_orig": 125000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 8GB/80GB",  "vcpu": 2, "ram_gb": 8,  "storage_gb": 80,  "storage_type": "SSD", "bandwidth_tb": 2.56, "speed_mbps": 30, "price": 90000,  "price_orig": 150000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 8GB/100GB", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "SSD", "bandwidth_tb": 3.07, "speed_mbps": 30, "price": 111000, "price_orig": 185000, "currency": "IDR", "url": "https://sumopod.com/"},
     ],
 }
 

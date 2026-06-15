@@ -5,6 +5,18 @@ import { convertPrice, fmtPrice, fmtStorage, fmtBandwidth, PROVIDER_NAMES, PAYME
 import type { Region, PaymentMethod } from '@/lib/types'
 import { buildAffiliateUrl, isAffiliate } from '@/lib/site'
 import ProviderLogo from '@/components/ProviderLogo'
+import { QrCode, Landmark, Wallet, CreditCard, Store, Banknote, Bitcoin, type LucideIcon } from 'lucide-react'
+
+// Generic category glyphs (not brand logos) — our data is per payment category.
+const PAYMENT_ICONS: Record<PaymentMethod, LucideIcon> = {
+  qris: QrCode,
+  transfer: Landmark,
+  ewallet: Wallet,
+  cc: CreditCard,
+  retail: Store,
+  paypal: Banknote,
+  crypto: Bitcoin,
+}
 
 export type SortKey = 'price-asc' | 'price-desc' | 'ram-desc' | 'cpu-desc' | 'value'
 
@@ -106,12 +118,22 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
                   <Spec>{p.vcpu} vCPU</Spec>
                   <Spec>{fmtStorage(p.ram_gb)} RAM</Spec>
                   <Spec>{fmtStorage(p.storage_gb)} {p.storage_type}</Spec>
-                  <InfoTip label="Kuota transfer data keluar/masuk per bulan. Unlimited = tidak dibatasi, biasanya tetap kena fair-use policy.">
-                    <Spec>{p.bandwidth_tb === null ? 'Transfer unlimited' : `Transfer ${fmtBandwidth(p.bandwidth_tb)}`}</Spec>
+                  <InfoTip label="Kuota transfer per bulan; angka Mbps = batas kecepatan kalau provider membatasinya. Unlimited = kuota tak dibatasi (umumnya tetap kena fair-use).">
+                    <Spec>
+                      {p.bandwidth_tb === null ? 'Transfer unlimited' : `Transfer ${fmtBandwidth(p.bandwidth_tb)}`}
+                      {p.speed_mbps ? ` · ${p.speed_mbps} Mbps` : ''}
+                    </Spec>
                   </InfoTip>
                 </div>
-                <div className="mt-1.5 text-[11px] text-muted-foreground">
-                  Bayar: {meta.payments.map(m => PAYMENT_LABELS[m]).join(' · ')}
+                <div className="mt-2 flex items-center gap-2 text-muted-foreground">
+                  {meta.payments.map(m => {
+                    const Icon = PAYMENT_ICONS[m]
+                    return (
+                      <InfoTip key={m} label={PAYMENT_LABELS[m]}>
+                        <Icon className="h-3.5 w-3.5" aria-label={PAYMENT_LABELS[m]} />
+                      </InfoTip>
+                    )
+                  })}
                 </div>
               </div>
 

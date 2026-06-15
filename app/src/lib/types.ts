@@ -18,6 +18,9 @@ export interface VPSPlan {
   discount_pct?: number | null;
   setup_fee?: number | null;
   price_annual_monthly?: number | null;
+  // Egress speed cap in Mbps, when the provider meters speed (e.g. Sumopod,
+  // Dalang). null/absent = no advertised consumer speed cap.
+  speed_mbps?: number | null;
 }
 
 export interface VPSResponse {

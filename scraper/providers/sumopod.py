@@ -35,6 +35,7 @@ def scrape() -> list[dict]:
             "storage_gb": p["storage_gb"],
             "storage_type": p["storage_type"],
             "bandwidth_tb": p["bandwidth_tb"],
+            "speed_mbps": p.get("speed_mbps"),
             "price_monthly": price,
             "price_original": original,
             "discount_pct": discount_pct,
