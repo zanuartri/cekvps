@@ -23,6 +23,20 @@ export default function Support() {
           </Button>
           <span className="text-xs text-primary-foreground/70">Sukarela · sekali atau berkala · mulai Rp1.000</span>
         </div>
+
+        {/* desktop: scan-to-pay from phone (QRIS-friendly); hidden on mobile */}
+        <div className="mt-7 hidden flex-col items-center gap-2 sm:flex">
+          <div className="rounded-xl bg-white p-2.5 shadow-sm">
+            <img
+              src="/saweria-qr.svg"
+              alt="QR ke halaman Saweria zanuartri"
+              width="112"
+              height="112"
+              className="block h-28 w-28"
+            />
+          </div>
+          <span className="text-xs text-primary-foreground/70">Scan buat traktir dari HP 📱</span>
+        </div>
       </div>
     </div>
   )
