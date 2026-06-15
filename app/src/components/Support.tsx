@@ -11,7 +11,7 @@ export default function Support() {
       />
       <div className="relative">
         <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-2xl">☕</span>
-        <h2 className="mt-4 text-2xl font-bold tracking-tight">Dukung CekVPS</h2>
+        <h2 className="mt-4 text-2xl font-bold tracking-tight">Traktir kopi ☕</h2>
         <p className="mx-auto mt-3 max-w-xl leading-relaxed text-primary-foreground/85">
           CekVPS gratis dan tanpa iklan. Kalau tools ini ngebantu kamu pilih VPS,
           traktir kopi seikhlasnya lewat Saweria. Semua dipakai buat bayar server
@@ -19,7 +19,7 @@ export default function Support() {
         </p>
         <div className="mt-6 flex flex-col items-center gap-2">
           <Button asChild size="lg" className="bg-white font-semibold text-primary hover:bg-white/90">
-            <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">💛 Dukung via Saweria</a>
+            <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">☕ Traktir kopi via Saweria</a>
           </Button>
           <span className="text-xs text-primary-foreground/70">Sukarela · sekali atau berkala · mulai Rp1.000</span>
         </div>

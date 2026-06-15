@@ -59,7 +59,7 @@ export default function Hero({ vps, lastRun }: HeroProps) {
               <a href="#vps">Lihat daftar VPS ↓</a>
             </Button>
             <Button asChild size="lg" variant="outline" className="font-medium">
-              <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">☕ Dukung</a>
+              <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">☕ Traktir kopi</a>
             </Button>
           </div>
 

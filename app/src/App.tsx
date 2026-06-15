@@ -115,7 +115,7 @@ function AppContent() {
           <div className="flex items-center gap-2 sm:gap-2.5">
             <CurrencyToggle />
             <Button asChild size="sm" className="h-9 font-semibold shadow-sm shadow-primary/20">
-              <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">☕ Dukung</a>
+              <a href={SAWERIA_URL} target="_blank" rel="noopener noreferrer">☕ Traktir kopi</a>
             </Button>
           </div>
         </div>
