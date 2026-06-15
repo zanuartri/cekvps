@@ -11,14 +11,14 @@ RUN npm run build          # → /app/dist (bundled data baked into dist/data)
 # ── Stage 2: runtime — nginx serves the SPA, cron refreshes the data ──────
 FROM nginx:1.27-alpine
 
-# Python scraper + cron (busybox crond ships with alpine)
-RUN apk add --no-cache python3 py3-pip tzdata
+# Python + scraper deps from Alpine packages — NOT pip. Installing via apk keeps
+# the libs in lockstep with the base image (pip builds pyexpat against a
+# mismatched libexpat in nginx:alpine and fails), and skips compiling lxml.
+# Cron is busybox crond, already in the alpine base.
+RUN apk add --no-cache python3 py3-requests py3-beautifulsoup4 py3-lxml tzdata
 ENV TZ=Asia/Jakarta
 
-WORKDIR /scraper
-COPY scraper/requirements.txt ./
-RUN pip install --no-cache-dir --break-system-packages -r requirements.txt
-COPY scraper/ ./
+COPY scraper/ /scraper/
 
 # SPA (includes the bundled /data so the site works before the first scrape)
 COPY --from=build /app/dist /usr/share/nginx/html
