@@ -31,7 +31,7 @@ const PAYMENT_OPTIONS: { value: PaymentMethod | 'all'; label: string }[] = [
   { value: 'ewallet', label: 'E-wallet' },
   { value: 'cc', label: 'Kartu Kredit' },
   { value: 'paypal', label: 'PayPal' },
-  { value: 'crypto', label: 'Crypto' },
+  { value: 'retail', label: 'Retail' },
 ]
 
 
@@ -193,7 +193,7 @@ function AppContent() {
 
                 <Select value={payment} onValueChange={v => setPayment(v as PaymentMethod | 'all')}>
                   <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0">
-                    <span className="text-muted-foreground">Bayar:&nbsp;</span>
+                    <span className="text-muted-foreground">Pembayaran:&nbsp;</span>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
