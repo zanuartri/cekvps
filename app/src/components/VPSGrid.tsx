@@ -100,8 +100,8 @@ export default function VPSGrid({ vps, filter, query = '', sort = 'price-asc', r
                 </div>
               </div>
 
-              {/* specs — fixed-width columns so vCPU/RAM/Storage line up across rows */}
-              <div className="grid grid-cols-[3rem_4.5rem_1fr] items-center gap-x-4 sm:grid-cols-[3.5rem_5rem_1fr] sm:gap-x-6">
+              {/* specs — even thirds on mobile; fixed-width aligned columns on desktop */}
+              <div className="grid grid-cols-3 items-center gap-x-2 sm:grid-cols-[3.5rem_5rem_1fr] sm:gap-x-6">
                 <Stat label="vCPU" value={String(p.vcpu)} />
                 <Stat label="RAM" value={fmtStorage(p.ram_gb)} />
                 <Stat label="Storage" value={`${fmtStorage(p.storage_gb)} ${p.storage_type}`} />

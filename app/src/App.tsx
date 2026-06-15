@@ -159,12 +159,12 @@ function AppContent() {
                     type="search"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
-                    placeholder="Cari provider, plan, atau spek… (mis. '8gb', 'contabo')"
-                    className="h-10 w-full rounded-lg border bg-card pl-9 pr-3 text-sm shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring/30"
+                    placeholder="Cari provider atau spek…"
+                    className="h-10 w-full rounded-full border bg-card pl-9 pr-4 text-sm shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring/30"
                   />
                 </div>
                 <Select value={sort} onValueChange={v => setSort(v as SortKey)}>
-                  <SelectTrigger className="h-10 sm:w-56 focus:ring-0 focus:ring-offset-0">
+                  <SelectTrigger className="h-10 rounded-full sm:w-56 focus:ring-0 focus:ring-offset-0">
                     <span className="text-muted-foreground">Urutkan:&nbsp;</span>
                     <SelectValue />
                   </SelectTrigger>
@@ -177,54 +177,59 @@ function AppContent() {
               </div>
 
               {/* filters: provider + payment dropdowns, region toggle — one tidy row */}
-              <div className="mb-4 flex flex-wrap items-center gap-2">
-                <Select value={filter ?? 'all'} onValueChange={v => setFilter(v === 'all' ? null : v)}>
-                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0">
-                    <span className="text-muted-foreground">Provider:&nbsp;</span>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Semua provider</SelectItem>
-                    {providers.map(p => (
-                      <SelectItem key={p} value={p}>{PROVIDER_NAMES[p] || p}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+                {/* dropdowns: side-by-side on mobile, inline on desktop */}
+                <div className="grid grid-cols-2 gap-2 sm:contents">
+                  <Select value={filter ?? 'all'} onValueChange={v => setFilter(v === 'all' ? null : v)}>
+                    <SelectTrigger className="h-8 w-full gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0 sm:w-auto">
+                      <span className="hidden text-muted-foreground sm:inline">Provider:&nbsp;</span>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Semua provider</SelectItem>
+                      {providers.map(p => (
+                        <SelectItem key={p} value={p}>{PROVIDER_NAMES[p] || p}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
 
-                <Select value={payment} onValueChange={v => setPayment(v as PaymentMethod | 'all')}>
-                  <SelectTrigger className="h-8 w-auto gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0">
-                    <span className="text-muted-foreground">Pembayaran:&nbsp;</span>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {PAYMENT_OPTIONS.map(o => (
-                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <Select value={payment} onValueChange={v => setPayment(v as PaymentMethod | 'all')}>
+                    <SelectTrigger className="h-8 w-full gap-1 rounded-full text-xs focus:ring-0 focus:ring-offset-0 sm:w-auto">
+                      <span className="hidden text-muted-foreground sm:inline">Pembayaran:&nbsp;</span>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {PAYMENT_OPTIONS.map(o => (
+                        <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
                 <span className="mx-0.5 hidden h-5 w-px bg-border sm:block" />
 
-                {(['local', 'global'] as Region[]).map(r => {
-                  const active = region === r
-                  return (
-                    <Chip key={r} active={active} onClick={() => setRegion(active ? 'all' : r)}>
-                      {r === 'local' ? (
-                        <span className="inline-flex items-center gap-1.5">
-                          <span className="inline-block w-3.5 h-2.5 rounded-xs overflow-hidden align-middle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]">
-                            <svg viewBox="0 0 3 2" className="w-full h-full block"><rect fill="#e70011" width="3" height="1"/><rect fill="#fff" y="1" width="3" height="1"/></svg>
+                <div className="flex gap-2">
+                  {(['local', 'global'] as Region[]).map(r => {
+                    const active = region === r
+                    return (
+                      <Chip key={r} active={active} onClick={() => setRegion(active ? 'all' : r)}>
+                        {r === 'local' ? (
+                          <span className="inline-flex items-center gap-1.5">
+                            <span className="inline-block w-3.5 h-2.5 rounded-xs overflow-hidden align-middle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]">
+                              <svg viewBox="0 0 3 2" className="w-full h-full block"><rect fill="#e70011" width="3" height="1"/><rect fill="#fff" y="1" width="3" height="1"/></svg>
+                            </span>
+                            {REGION_LABELS[r]}
                           </span>
-                          {REGION_LABELS[r]}
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1">
-                          <span className="text-[13px]">🌐</span>
-                          {REGION_LABELS[r]}
-                        </span>
-                      )}
-                    </Chip>
-                  )
-                })}
+                        ) : (
+                          <span className="inline-flex items-center gap-1">
+                            <span className="text-[13px]">🌐</span>
+                            {REGION_LABELS[r]}
+                          </span>
+                        )}
+                      </Chip>
+                    )
+                  })}
+                </div>
               </div>
 
               <VPSGrid vps={vps} filter={filter} query={query} sort={sort} region={region} payment={payment} />
