@@ -40,8 +40,10 @@ export interface FxEntry { symbol: string; locale: string; decimals: number; toI
 
 const FX_DEFAULTS: Record<CurrencyCode, FxEntry> = {
   IDR: { symbol: 'Rp', locale: 'id-ID', decimals: 0, toIDR: 1 },
-  USD: { symbol: '$', locale: 'en-US', decimals: 2, toIDR: 16200 },
-  EUR: { symbol: '€', locale: 'de-DE', decimals: 2, toIDR: 17600 },
+  // Fallback only — live rates come from /data/fx.json. Keep roughly current so a
+  // failed fetch isn't wildly off (refreshed Jun 2026).
+  USD: { symbol: '$', locale: 'en-US', decimals: 2, toIDR: 17800 },
+  EUR: { symbol: '€', locale: 'de-DE', decimals: 2, toIDR: 20600 },
 };
 
 export const FX: Record<CurrencyCode, FxEntry> = { ...FX_DEFAULTS };

@@ -1,8 +1,9 @@
 const FAQS: { q: string; a: string }[] = [
   {
     q: 'Dari mana datanya?',
-    a: 'Harga diambil otomatis dari halaman resmi tiap provider dan diperbarui secara berkala. ' +
-      'Kalau scraping gagal, kami pakai harga terakhir yang diketahui agar situs tetap akurat.',
+    a: 'Sebagian besar harga diambil otomatis dari halaman resmi provider; sebagian dikurasi ' +
+      'manual untuk provider yang halamannya tidak bisa di-scrape. Diperbarui berkala, dan kalau ' +
+      'scraping gagal kami pakai harga terakhir yang diketahui agar situs tetap akurat.',
   },
   {
     q: 'Apakah CekVPS berbayar?',
@@ -15,9 +16,9 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Metode pembayaran yang ditampilkan akurat?',
-    a: 'Bersifat indikatif. Provider lokal (Biznet Gio, IDCloudHost, Dalang.io) umumnya menerima QRIS, ' +
-      'transfer bank, dan e-wallet; provider global biasanya kartu kredit atau PayPal. ' +
-      'Cek metode final di halaman checkout provider sebelum bayar.',
+    a: 'Diverifikasi dari halaman/checkout resmi tiap provider (per Juni 2026). Provider lokal ' +
+      'umumnya QRIS, transfer/VA, e-wallet, dan kartu kredit; yang global pakai kartu kredit / ' +
+      'PayPal. Tetap bisa berubah — cek final di checkout sebelum bayar.',
   },
   {
     q: 'Provider saya belum ada. Bisa ditambah?',

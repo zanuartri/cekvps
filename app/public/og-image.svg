@@ -82,9 +82,9 @@
   <!-- left: copy -->
   <!-- badge pill -->
   <g>
-    <rect x="64" y="196" width="232" height="38" rx="19" fill="#1A1A1A" fill-opacity="0.6" stroke="#fff" stroke-opacity="0.10"/>
+    <rect x="64" y="196" width="270" height="38" rx="19" fill="#1A1A1A" fill-opacity="0.6" stroke="#fff" stroke-opacity="0.10"/>
     <circle cx="86" cy="215" r="4" fill="#10B981"/>
-    <text x="100" y="221" class="sans" font-size="15" font-weight="500" fill="#B7B7BD">8 provider · 45 plan · gratis</text>
+    <text x="100" y="221" class="sans" font-size="15" font-weight="500" fill="#B7B7BD">8 provider lokal &amp; global · gratis</text>
   </g>
 
   <text x="62" y="316" class="sans" font-size="58" font-weight="800" fill="#fff" letter-spacing="-1.5">Cari VPS termurah,</text>
