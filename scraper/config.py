@@ -89,12 +89,9 @@ FALLBACK_VPS = {
         {"plan": "Basic Standard 4GB/60GB", "vcpu": 2, "ram_gb": 4, "storage_gb": 60, "storage_type": "SSD", "bandwidth_tb": None, "price": 225000, "currency": "IDR", "url": "https://idcloudhost.com/pricing/"},
     ],
     # Sumopod resells Tencent Cloud VPS. The deploy panel is an auth-gated SPA
-    # behind Cloudflare (not scrapable), so data is curated. `price` is the
-    # 40%-off price; `price_orig` is the normal price. The 40% discount is
-    # public AND recurring (applies to renewals) for ALL users — verified via
-    # Sumopod's official Threads (@sumopodcloud, "Syukuran Diskon 40% Untuk
-    # Semua VPS Tencent"), so `price` is the real ongoing price, not a teaser.
-    # Do NOT "correct" it up to price_orig. bandwidth_tb = monthly egress.
+    # behind Cloudflare (not scrapable), so data is curated. The 40%-off
+    # "Syukuran Diskon" promo has ended, so `price` is now the normal ongoing
+    # price (no `price_orig` strike). bandwidth_tb = monthly egress.
     # Hostinger's KVM VPS line. The /id/harga/vps-hosting page is server-rendered
     # but the price reflects whatever subscription term is *default-selected* (it
     # flips between the 24- and 48-month promo on different loads), and the
@@ -156,12 +153,12 @@ FALLBACK_VPS = {
         {"plan": "Performance", "vcpu": 8, "ram_gb": 16, "storage_gb": 100, "speed_mbps": 100, "storage_type": "NVMe", "bandwidth_tb": None, "price": 466200, "currency": "IDR", "url": "https://dalang.io/products/vps"},
     ],
     "sumopod": [
-        {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "speed_mbps": 20, "price": 36000,  "price_orig": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "speed_mbps": 30, "price": 45000,  "price_orig": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 4GB/60GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "storage_type": "SSD", "bandwidth_tb": 1.54, "speed_mbps": 30, "price": 54000,  "price_orig": 90000,  "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 4GB/70GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 70,  "storage_type": "SSD", "bandwidth_tb": 2.05, "speed_mbps": 30, "price": 75000,  "price_orig": 125000, "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 8GB/80GB",  "vcpu": 2, "ram_gb": 8,  "storage_gb": 80,  "storage_type": "SSD", "bandwidth_tb": 2.56, "speed_mbps": 30, "price": 90000,  "price_orig": 150000, "currency": "IDR", "url": "https://sumopod.com/"},
-        {"plan": "Cloud 8GB/100GB", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "SSD", "bandwidth_tb": 3.07, "speed_mbps": 30, "price": 111000, "price_orig": 185000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 2GB/40GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 40,  "storage_type": "SSD", "bandwidth_tb": 0.5,  "speed_mbps": 20, "price": 60000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 2GB/50GB",  "vcpu": 2, "ram_gb": 2,  "storage_gb": 50,  "storage_type": "SSD", "bandwidth_tb": 1.02, "speed_mbps": 30, "price": 75000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 4GB/60GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 60,  "storage_type": "SSD", "bandwidth_tb": 1.54, "speed_mbps": 30, "price": 90000,  "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 4GB/70GB",  "vcpu": 2, "ram_gb": 4,  "storage_gb": 70,  "storage_type": "SSD", "bandwidth_tb": 2.05, "speed_mbps": 30, "price": 125000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 8GB/80GB",  "vcpu": 2, "ram_gb": 8,  "storage_gb": 80,  "storage_type": "SSD", "bandwidth_tb": 2.56, "speed_mbps": 30, "price": 150000, "currency": "IDR", "url": "https://sumopod.com/"},
+        {"plan": "Cloud 8GB/100GB", "vcpu": 2, "ram_gb": 8,  "storage_gb": 100, "storage_type": "SSD", "bandwidth_tb": 3.07, "speed_mbps": 30, "price": 185000, "currency": "IDR", "url": "https://sumopod.com/"},
     ],
 }
 
